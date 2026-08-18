@@ -1,71 +1,80 @@
-body{
-    background:red !important;
-}
 *{
-box-sizing:border-box;
+    box-sizing:border-box;
 }
-
 
 
 html,
 body{
 
-margin:0;
+    margin:0;
+    padding:0;
 
-padding:0;
-
-min-height:100%;
+    min-height:100%;
 
 }
-
 
 
 body{
 
-background:
+    background:
+    radial-gradient(
+        ellipse at center,
+        #111 0%,
+        #050505 45%,
+        #000 100%
+    );
 
-radial-gradient(
-circle at center,
-#101010 0%,
-#030303 70%
-);
+    color:#00ff88;
 
+    font-family:
+    "Courier New",
+    monospace;
 
-color:#00ff88;
-
-
-font-family:
-
-"Courier New",
-monospace;
-
-
-overflow-x:hidden;
-
-overflow-y:auto;
-
+    overflow-x:hidden;
 
 }
 
 
 
-/* 主窗口 */
+/* CRT 扫描线 */
 
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    background:
+
+    repeating-linear-gradient(
+        0deg,
+        rgba(0,255,136,.04),
+        rgba(0,255,136,.04) 1px,
+        transparent 1px,
+        transparent 4px
+    );
+
+    z-index:999;
+
+}
+
+
+
+/* 终端主体 */
 
 .terminal{
 
+    width:min(900px,92%);
 
-width:min(900px,92%);
+    min-height:100vh;
 
+    margin:auto;
 
-min-height:100vh;
-
-
-margin:auto;
-
-
-padding:20px 0;
-
+    padding:25px 0;
 
 }
 
@@ -73,116 +82,125 @@ padding:20px 0;
 
 /* 顶部 */
 
-
 .top{
 
+    border:1px solid #00ff88;
 
-border:1px solid #00ff88;
+    padding:15px;
 
+    font-size:22px;
 
-padding:15px;
-
-
-font-size:22px;
-
-
-letter-spacing:3px;
+    letter-spacing:4px;
 
 
-background:
+    background:
 
-rgba(0,255,136,.04);
-
-
-box-shadow:
-
-0 0 15px rgba(0,255,136,.5),
-
-inset 0 0 10px rgba(0,255,136,.2);
+    rgba(0,255,136,.04);
 
 
-text-shadow:
+    box-shadow:
 
-0 0 8px #00ff88;
+    0 0 15px rgba(0,255,136,.8),
+
+    inset 0 0 15px rgba(0,255,136,.2);
+
+
+    text-shadow:
+
+    0 0 10px #00ff88;
 
 
 }
 
 
 
-/* 主屏幕 */
-
+/* 内容区域 */
 
 .screen{
 
+    margin-top:15px;
 
-margin-top:15px;
-
-
-border:1px solid #00ff88;
+    padding:25px;
 
 
-padding:20px;
+    border:
+
+    1px solid #00ff88;
 
 
-min-height:400px;
+    min-height:400px;
 
 
-height:auto;
+    background:
+
+    rgba(0,0,0,.65);
 
 
-overflow:visible;
+    box-shadow:
+
+    0 0 25px rgba(0,255,136,.5),
+
+    inset 0 0 20px rgba(0,255,136,.1);
 
 
-background:
+    text-shadow:
 
-rgba(0,0,0,.55);
-
-
-box-shadow:
+    0 0 6px rgba(0,255,136,.8);
 
 
-0 0 20px rgba(0,255,136,.35),
+    animation:
 
-inset 0 0 20px rgba(0,255,136,.08);
-
-
-text-shadow:
-
-0 0 5px rgba(0,255,136,.7);
+    screenOn .8s;
 
 
 }
 
 
 
-/* 文字 */
+@keyframes screenOn{
 
+    from{
+
+        opacity:0;
+
+        transform:scale(.98);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+
+/* 普通文字 */
 
 p{
 
-margin:10px 0;
+    line-height:1.8;
 
 }
 
 
 
-/* 分割线 */
+/* 红色异常 */
+
+.danger,
+.warning{
+
+    color:#ff3333;
 
 
-hr{
+    text-shadow:
 
-
-border:0;
-
-
-border-top:
-
-1px solid #00ff88;
-
-
-opacity:.5;
-
+    0 0 10px red;
 
 }
 
@@ -190,31 +208,34 @@ opacity:.5;
 
 /* 输入框 */
 
-
 input{
 
 
-background:#050505;
+    width:100%;
+
+    max-width:400px;
 
 
-color:#00ff88;
+    padding:12px;
 
 
-border:
-
-1px solid #00ff88;
+    background:#000;
 
 
-padding:10px;
+    color:#00ff88;
 
 
-font-family:inherit;
+    border:
+
+    1px solid #00ff88;
 
 
-box-shadow:
+    font-family:inherit;
 
-0 0 10px rgba(0,255,136,.4);
 
+    box-shadow:
+
+    0 0 10px rgba(0,255,136,.5);
 
 }
 
@@ -222,37 +243,38 @@ box-shadow:
 
 /* 按钮 */
 
-
 button{
 
 
-background:#050505;
+    margin-top:20px;
 
 
-color:#00ff88;
+    padding:12px 30px;
 
 
-border:
-
-1px solid #00ff88;
+    background:#000;
 
 
-padding:12px 25px;
+    color:#00ff88;
 
 
-font-family:inherit;
+    border:
+
+    1px solid #00ff88;
 
 
-cursor:pointer;
+    font-family:inherit;
 
 
-box-shadow:
+    cursor:pointer;
 
 
-0 0 10px rgba(0,255,136,.5);
+    box-shadow:
+
+    0 0 12px rgba(0,255,136,.6);
 
 
-transition:.2s;
+    transition:.2s;
 
 
 }
@@ -262,51 +284,28 @@ transition:.2s;
 button:hover{
 
 
-background:#00ff88;
+    background:#00ff88;
+
+    color:#000;
 
 
-color:#000;
+    box-shadow:
 
-
-box-shadow:
-
-
-0 0 20px #00ff88;
-
-
-}
-
-
-
-/* 红色异常 */
-
-
-.danger,
-.warning{
-
-
-color:#ff3333;
-
-
-text-shadow:
-
-0 0 8px #ff3333;
+    0 0 25px #00ff88;
 
 
 }
 
 
 
-/* 故障闪烁 */
-
+/* 故障效果 */
 
 .glitch{
 
 
-animation:
+    animation:
 
-glitch .15s;
-
+    glitch .15s;
 
 }
 
@@ -315,131 +314,92 @@ glitch .15s;
 @keyframes glitch{
 
 
-0%{
+    0%{
 
-transform:translate(0);
+        transform:translate(0);
 
-}
-
-
-30%{
-
-transform:translate(-3px);
-
-}
+    }
 
 
-60%{
+    25%{
 
-transform:translate(3px);
+        transform:translate(-4px,2px);
 
-}
-
-
-100%{
-
-transform:translate(0);
-
-}
+    }
 
 
-}
+    50%{
+
+        transform:translate(4px,-2px);
+
+    }
 
 
+    100%{
 
-/* 扫描线效果 */
+        transform:translate(0);
 
-
-.screen::after{
-
-
-content:"";
-
-
-position:fixed;
-
-
-left:0;
-
-
-top:0;
-
-
-width:100%;
-
-
-height:100%;
-
-
-pointer-events:none;
-
-
-background:
-
-linear-gradient(
-
-rgba(255,255,255,.03) 1px,
-
-transparent 1px
-
-);
-
-
-background-size:
-
-100% 4px;
-
-
-opacity:.15;
-
+    }
 
 }
-
 
 
 
 
 /* 手机 */
 
-
 @media(max-width:768px){
 
 
+    .terminal{
 
-.terminal{
+        width:92%;
 
-width:92%;
+        padding-top:10px;
 
-padding-top:10px;
+    }
+
+
+
+    .top{
+
+        font-size:17px;
+
+    }
+
+
+
+    .screen{
+
+        padding:15px;
+
+        font-size:13px;
+
+    }
+
+
+
+    button{
+
+        width:100%;
+
+    }
+
 
 }
 
 
 
-.top{
+/* 平板 */
 
-font-size:18px;
-
-}
+@media(min-width:769px) and (max-width:1200px){
 
 
+    .terminal{
 
-.screen{
+        width:85%;
 
-padding:15px;
-
-font-size:13px;
-
-}
-
-
-
-button{
-
-width:100%;
-
-}
-
+    }
 
 
 }
