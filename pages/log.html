@@ -150,58 +150,61 @@ UNKNOWN
 
 <script>
 
-
-
 function openFile(){
 
 
-document.getElementById("file").innerHTML=
+let file=document.getElementById("file");
 
-`
+
+file.innerHTML=`
 
 <hr>
 
 <p>
-
 CORRUPTED_DATA_001
-
 </p>
 
 
 <p>
 
-01001110
-
-01010101
-
+01001110 
+01010101 
+01001100 
 01001100
 
-01001100
+</p>
 
+
+<p>
+
+解析结果：
+
+NULL
 
 </p>
 
 
 <p>
 
-数据损坏。
+隐藏信息：
+
+"寻找不存在的记录"
 
 </p>
-
-
-<p>
-
-提示：
-
-不要相信完整记录。
-
-</p>
-
 
 `;
 
 }
 
+
+
+function backHome(){
+
+window.location.href="../index.html";
+
+}
+
+</script>
 
 
 function backHome(){
