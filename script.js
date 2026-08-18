@@ -1,128 +1,71 @@
-let bootText = [
-
-"正在启动 NULL-01 系统...",
-"检查数据完整性...",
-"发现异常文件...",
-"尝试恢复...",
-"",
-"警告：部分档案已被删除"
-
-];
+// NULL-01 主程序
 
 
-let index=0;
-
-
-
-function boot(){
-
-if(index < bootText.length){
-
-
-document.getElementById("boot").innerHTML 
-+= "<br>" + bootText[index];
-
-
-index++;
-
-setTimeout(boot,600);
-
-
-}
-
-}
-
-
-boot();
-
-
-
-function login(){
-
-
-let code=
-document.getElementById("password").value;
-
-
-
-if(code==="0818"){
-
-
-document.getElementById("login")
-.style.display="none";
-
-
-document.getElementById("menu")
-.classList.remove("hide");
-
-
-
-document.getElementById("screen")
-.innerHTML=
-
-`
-<p>
-身份确认成功。
-</p>
-
-<p>
-用户编号：UNKNOWN
-</p>
-
-<p>
-欢迎访问 NULL-01 数据库。
-</p>
-`;
-
-
-
-}
-
-else{
-
-
-document.getElementById("screen")
-.innerHTML +=
-
-`
-<br>
-> 错误代码：
-${code}
-
-<br>
-> 访问记录已保存。
-
-`;
-
-}
-
-
-
-}
-
-
-
-function openArchive(){
-
-
-localStorage.setItem(
-"archive",
-"true"
+console.log(
+"NULL-01 SYSTEM ONLINE"
 );
 
 
-location.href="pages/archive.html";
+// 打开第一份日志
+
+function openLog(){
+
+
+    localStorage.setItem(
+        "NULL01_progress",
+        "LOG-000"
+    );
+
+
+    window.location.href =
+    "pages/log.html";
 
 
 }
 
 
 
-function openTerminal(){
+// 检查玩家进度
+
+function checkProgress(){
 
 
-location.href=
-"pages/terminal.html";
+    let progress =
+    localStorage.getItem(
+        "NULL01_progress"
+    );
+
+
+    return progress;
+
+
+}
+
+
+
+// 解锁记录
+
+function unlock(id){
+
+
+    localStorage.setItem(
+        "NULL01_unlock",
+        id
+    );
+
+
+}
+
+
+
+// 获取解锁状态
+
+function getUnlock(){
+
+
+    return localStorage.getItem(
+        "NULL01_unlock"
+    );
 
 
 }
