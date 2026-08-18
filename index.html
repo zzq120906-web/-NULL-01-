@@ -4,9 +4,10 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>NULL-01 | 遗失协议</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NULL-01：遗失协议</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -16,73 +17,92 @@
 <body>
 
 
+<div class="noise"></div>
+
+
+
 <div class="terminal">
 
 
-<div class="header">
-NULL-01 ARCHIVE SYSTEM
+<div class="top">
+
+NULL-01 // LOST PROTOCOL
+
 </div>
 
 
-<div class="content">
+
+<div class="status">
+
+SYSTEM STATUS:
+<span class="danger">
+UNSTABLE
+</span>
+
+</div>
+
+
+
+<div class="screen">
+
+
+<p id="typing"></p>
+
+
+
+<div class="panel">
 
 
 <p>
-系统状态：
-<span class="error">
-异常
+恢复任务：
+NULL-01
+</p>
+
+
+<p>
+数据完整度：
+<span id="percent">
+37%
 </span>
 </p>
 
 
 <p>
-正在恢复残缺数据...
+发现异常文件：
+<span class="warning">
+1
+</span>
 </p>
 
 
-<p>
-恢复完成。
-</p>
+</div>
 
 
-<hr>
 
+<button onclick="startGame()">
 
-<h3>
-发现未归档记录
-</h3>
-
-
-<p>
-编号：
-LOG-000
-</p>
-
-
-<p>
-日期：
-2026 / 08 / 18
-</p>
-
-
-<button onclick="openLog()">
-
-查看记录
+进入系统
 
 </button>
 
 
+
 </div>
+
 
 
 <div class="footer">
 
-NULL Corporation © 2026
+© NULL CORPORATION
+<br>
+Unauthorized access will be recorded.
 
 </div>
 
 
+
 </div>
+
 
 
 <script src="script.js"></script>
