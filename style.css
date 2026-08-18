@@ -1,7 +1,4 @@
-/* ==========================
-   NULL-01 SYSTEM UI
-   Stable Version
-========================== */
+/* NULL-01 SYSTEM UI */
 
 
 *{
@@ -12,8 +9,7 @@ box-sizing:border-box;
 
 
 
-html,
-body{
+html,body{
 
 margin:0;
 
@@ -27,13 +23,15 @@ min-height:100%;
 
 body{
 
+
 background:
 
 radial-gradient(
-ellipse at center,
-#121212 0%,
-#050505 55%,
-#000000 100%
+circle at 50% 30%,
+#17231d 0%,
+#09100c 35%,
+#020302 75%,
+#000 100%
 );
 
 
@@ -55,9 +53,43 @@ overflow-y:auto;
 
 
 
-/* ==========================
-   主终端窗口
-========================== */
+/* 背景光晕 */
+
+
+body::before{
+
+
+content:"";
+
+
+position:fixed;
+
+
+inset:0;
+
+
+pointer-events:none;
+
+
+
+background:
+
+radial-gradient(
+circle,
+rgba(0,255,136,.12),
+transparent 45%
+);
+
+
+
+z-index:-1;
+
+
+}
+
+
+
+/* 终端 */
 
 
 .terminal{
@@ -69,7 +101,7 @@ width:min(900px,92%);
 min-height:100vh;
 
 
-margin:0 auto;
+margin:auto;
 
 
 padding:25px 0;
@@ -78,10 +110,6 @@ padding:25px 0;
 }
 
 
-
-/* ==========================
-   顶部标题
-========================== */
 
 
 .top{
@@ -101,35 +129,22 @@ font-size:22px;
 letter-spacing:4px;
 
 
-background:
-
-rgba(0,255,136,0.03);
-
-
-
 box-shadow:
 
 
-0 0 15px rgba(0,255,136,.45),
-
-
-inset 0 0 10px rgba(0,255,136,.15);
+0 0 20px rgba(0,255,136,.5);
 
 
 
 text-shadow:
 
 
-0 0 8px #00ff88;
+0 0 10px #00ff88;
 
 
 }
 
 
-
-/* ==========================
-   内容屏幕
-========================== */
 
 
 .screen{
@@ -141,13 +156,7 @@ margin-top:15px;
 padding:25px;
 
 
-
 min-height:400px;
-
-
-
-height:auto;
-
 
 
 border:
@@ -158,113 +167,31 @@ border:
 
 background:
 
-
-rgba(0,0,0,.75);
+rgba(0,0,0,.65);
 
 
 
 box-shadow:
 
 
+0 0 25px rgba(0,255,136,.45),
 
-0 0 20px rgba(0,255,136,.4),
 
-
-inset 0 0 20px rgba(0,255,136,.08);
+inset 0 0 20px rgba(0,255,136,.15);
 
 
 
 text-shadow:
 
 
-0 0 5px rgba(0,255,136,.7);
-
-
-
-animation:
-
-screenAppear .8s ease;
+0 0 6px #00ff88;
 
 
 }
 
 
 
-@keyframes screenAppear{
-
-
-from{
-
-opacity:0;
-
-transform:scale(.98);
-
-}
-
-
-to{
-
-opacity:1;
-
-transform:scale(1);
-
-}
-
-
-}
-
-
-
-
-/* ==========================
-   文字
-========================== */
-
-
-p{
-
-
-line-height:1.8;
-
-
-margin:10px 0;
-
-
-}
-
-
-
-/* ==========================
-   发光文字
-========================== */
-
-
-.system-title{
-
-
-text-align:center;
-
-
-letter-spacing:6px;
-
-
-font-size:26px;
-
-
-text-shadow:
-
-
-0 0 15px #00ff88;
-
-
-}
-
-
-
-
-/* ==========================
-   红色异常
-========================== */
+/* 红色异常 */
 
 
 .danger,
@@ -276,103 +203,26 @@ color:#ff3333;
 
 text-shadow:
 
-
-0 0 8px #ff3333;
-
-
-}
-
-
-
-/* ==========================
-   输入框
-========================== */
-
-
-input{
-
-
-width:100%;
-
-
-max-width:400px;
-
-
-padding:12px;
-
-
-
-background:#000;
-
-
-
-color:#00ff88;
-
-
-
-border:
-
-1px solid #00ff88;
-
-
-
-font-family:
-
-inherit;
-
-
-
-outline:none;
-
-
-
-box-shadow:
-
-
-0 0 10px rgba(0,255,136,.4);
-
+0 0 10px red;
 
 
 }
 
 
 
-
-input:focus{
-
-
-box-shadow:
-
-
-0 0 20px rgba(0,255,136,.8);
-
-
-}
-
-
-
-
-/* ==========================
-   按钮
-========================== */
+/* 按钮 */
 
 
 button{
 
 
-margin-top:20px;
-
-
 padding:12px 30px;
-
 
 
 background:#000;
 
 
-
 color:#00ff88;
-
 
 
 border:
@@ -380,11 +230,7 @@ border:
 1px solid #00ff88;
 
 
-
-font-family:
-
-inherit;
-
+font-family:inherit;
 
 
 cursor:pointer;
@@ -394,11 +240,7 @@ cursor:pointer;
 box-shadow:
 
 
-0 0 12px rgba(0,255,136,.5);
-
-
-
-transition:.2s;
+0 0 15px rgba(0,255,136,.6);
 
 
 
@@ -415,21 +257,12 @@ background:#00ff88;
 color:#000;
 
 
-
-box-shadow:
-
-
-0 0 25px #00ff88;
-
-
-
 }
 
 
 
-/* ==========================
-   故障动画
-========================== */
+
+/* 故障 */
 
 
 .glitch{
@@ -437,14 +270,14 @@ box-shadow:
 
 animation:
 
-glitch .15s;
+shake .18s;
 
 
 }
 
 
 
-@keyframes glitch{
+@keyframes shake{
 
 
 0%{
@@ -456,21 +289,14 @@ transform:translate(0);
 
 25%{
 
-transform:translate(-3px,1px);
+transform:translate(-5px);
 
 }
 
 
 50%{
 
-transform:translate(3px,-1px);
-
-}
-
-
-75%{
-
-transform:translate(-2px);
+transform:translate(5px);
 
 }
 
@@ -486,60 +312,16 @@ transform:translate(0);
 
 
 
-
-/* ==========================
-   光标效果
-========================== */
-
-
-.cursor::after{
-
-
-content:"_";
-
-
-animation:
-
-blink .8s infinite;
-
-
-}
-
-
-
-@keyframes blink{
-
-
-50%{
-
-
-opacity:0;
-
-
-}
-
-
-}
-
-
-
-
-/* ==========================
-   手机适配
-========================== */
+/* 手机 */
 
 
 @media(max-width:768px){
-
 
 
 .terminal{
 
 
 width:92%;
-
-
-padding-top:10px;
 
 
 }
@@ -550,9 +332,6 @@ padding-top:10px;
 
 
 font-size:18px;
-
-
-letter-spacing:2px;
 
 
 }
@@ -568,21 +347,7 @@ padding:15px;
 font-size:13px;
 
 
-min-height:300px;
-
-
 }
-
-
-
-.system-title{
-
-
-font-size:20px;
-
-
-}
-
 
 
 button{
@@ -592,78 +357,6 @@ width:100%;
 
 
 }
-
-
-
-}
-
-
-
-
-/* ==========================
-   平板适配
-========================== */
-
-
-@media(min-width:769px) and (max-width:1200px){
-
-
-
-.terminal{
-
-
-width:85%;
-
-
-}
-
-
-
-.screen{
-
-
-padding:20px;
-
-
-}
-
-
-
-}
-
-
-
-
-/* ==========================
-   小屏手机
-========================== */
-
-
-@media(max-width:420px){
-
-
-
-.screen{
-
-
-font-size:12px;
-
-
-padding:12px;
-
-
-}
-
-
-
-.top{
-
-
-font-size:16px;
-
-
-}
-
 
 
 }
