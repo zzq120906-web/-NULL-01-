@@ -8,13 +8,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>
-NULL-01 SYSTEM
+NULL-01 END
 </title>
+
 
 <link rel="stylesheet" href="../style.css">
 
 
 <style>
+
+
+.screen{
+
+font-size:15px;
+
+line-height:1.6;
+
+padding:15px;
+
+}
+
 
 
 .warning{
@@ -25,15 +38,15 @@ color:#ff3333;
 
 
 
-.hidden-file{
+.hidden{
 
-animation:appear 1s;
+animation:show 1s;
 
 }
 
 
 
-@keyframes appear{
+@keyframes show{
 
 
 from{
@@ -53,11 +66,27 @@ opacity:1;
 }
 
 
+
+@media(max-width:768px){
+
+
+.screen{
+
+font-size:12px;
+
+padding:10px;
+
+}
+
+
+
+}
+
+
 </style>
 
 
 </head>
-
 
 
 <body>
@@ -65,7 +94,6 @@ opacity:1;
 
 
 <div class="terminal">
-
 
 
 <div class="top">
@@ -79,8 +107,7 @@ NULL-01 SYSTEM
 <div class="screen">
 
 
-
-<p id="text"></p>
+<div id="text"></div>
 
 
 
@@ -111,46 +138,46 @@ let lines=[
 "",
 
 
-"已确认异常档案：NULL-01",
+"异常档案：NULL-01",
+
+
+"已确认。",
 
 
 "",
 
 
-"系统检测到多个异常。",
+"检测结果：",
 
 
 "",
 
 
-"异常一：",
+"档案状态：不存在",
 
 
-"档案不存在。",
-
-
-"",
-
-
-"异常二：",
-
-
-"档案拥有访问记录。",
+"访问记录：存在",
 
 
 "",
 
 
-"异常三：",
+"创建时间：2026-08-17",
 
 
-"访问发生于系统启动之前。",
+"系统启动时间：2026-08-18",
 
 
 "",
 
 
-"正在查询访问者信息...",
+"时间记录冲突。",
+
+
+"",
+
+
+"正在查询创建者...",
 
 
 "",
@@ -168,7 +195,7 @@ let i=0;
 
 
 
-function type(){
+function typing(){
 
 
 
@@ -182,13 +209,11 @@ box.innerHTML+=lines[i]+"<br>";
 i++;
 
 
-setTimeout(type,650);
+setTimeout(typing,450);
 
 
 
 }
-
-
 
 else{
 
@@ -200,13 +225,14 @@ setTimeout(()=>{
 
 box.innerHTML+=
 
-
 `
 
 <br>
+
 <hr>
 
-<p class="warning hidden-file">
+
+<p class="warning hidden">
 
 发现未读取文件：
 
@@ -215,7 +241,6 @@ box.innerHTML+=
 LOG-001
 
 </p>
-
 
 `;
 
@@ -226,16 +251,15 @@ setTimeout(()=>{
 
 box.innerHTML+=
 
-
 `
 
 <br>
 
+
 文件状态：
 
-<br>
-
 等待恢复。
+
 
 `;
 
@@ -245,7 +269,7 @@ box.innerHTML+=
 
 
 
-},1500);
+},1200);
 
 
 
@@ -257,12 +281,11 @@ box.innerHTML+=
 
 
 
-type();
+typing();
 
 
 
 </script>
-
 
 
 
