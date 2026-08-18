@@ -25,14 +25,6 @@ margin-top:25px;
 
 
 
-.normal{
-
-color:#00ff88;
-
-}
-
-
-
 .error{
 
 color:#ff3333;
@@ -43,49 +35,63 @@ color:#ff3333;
 
 .found{
 
-font-size:20px;
-
 color:#ff3333;
 
-animation:flash .8s;
+font-size:22px;
 
 }
 
 
 
-@keyframes flash{
+.hidden{
+
+display:none;
+
+}
+
+
+
+.glitch{
+
+animation:glitch .15s;
+
+}
+
+
+
+@keyframes glitch{
 
 
 0%{
 
-opacity:0;
+transform:translate(0);
 
 }
 
 
-50%{
+30%{
 
-opacity:1;
+transform:translate(-5px);
+
+}
+
+
+60%{
+
+transform:translate(5px);
 
 }
 
 
 100%{
 
-opacity:1;
+transform:translate(0);
 
 }
 
 
 }
 
-
-
-.scan{
-
-animation:blink 1s infinite;
-
-}
 
 
 </style>
@@ -102,11 +108,13 @@ animation:blink 1s infinite;
 <div class="terminal">
 
 
+
 <div class="top">
 
 NULL-01 DATABASE
 
 </div>
+
 
 
 
@@ -138,12 +146,11 @@ ONLINE
 
 
 
-<input id="code" placeholder="请输入编号">
+<input id="code" autocomplete="off">
 
 
 
 <br>
-
 
 
 <button onclick="searchFile()">
@@ -154,29 +161,15 @@ ONLINE
 
 
 
-
 <div id="result"></div>
 
 
 
-<br>
-
-
-
-<button onclick="location.href='log.html'">
-
-返回日志
-
-</button>
-
-
-
 </div>
 
 
 
 </div>
-
 
 
 
@@ -185,31 +178,45 @@ ONLINE
 <script>
 
 
+let result=document.getElementById("result");
+
+
+
 function searchFile(){
 
 
 
-let code=
+let code=document
 
-document.getElementById("code").value.trim();
+.getElementById("code")
 
+.value
 
+.trim()
 
-let result=
-
-document.getElementById("result");
+.toUpperCase();
 
 
 
 result.innerHTML=
 
-"<p class='scan'>正在检索...</p>";
+`
 
+<p>
+
+正在检索...
+
+</p>
+
+`;
 
 
 
 setTimeout(()=>{
 
+
+
+// 正常档案
 
 
 if(code==="001"){
@@ -218,11 +225,12 @@ if(code==="001"){
 
 result.innerHTML=
 
+
 `
 
 <hr>
 
-<p class="normal">
+<p>
 
 档案编号：
 
@@ -273,11 +281,15 @@ result.innerHTML=
 
 
 
+// 空档案
+
+
 else if(code==="000"){
 
 
 
 result.innerHTML=
+
 
 `
 
@@ -311,7 +323,7 @@ result.innerHTML=
 
 <br>
 
-该编号没有对应文件。
+没有对应文件。
 
 </p>
 
@@ -323,14 +335,24 @@ result.innerHTML=
 
 
 
-else if(code.toUpperCase()==="NULL"){
+// 异常档案
+
+
+else if(code==="NULL-01"){
 
 
 
 result.innerHTML=
 
-"<p>查询失败。</p>";
+`
 
+<p class="error">
+
+QUERY ERROR
+
+</p>
+
+`;
 
 
 
@@ -348,11 +370,13 @@ result.innerHTML=
 
 <hr>
 
+
 <p class="found">
 
 FOUND
 
 </p>
+
 
 
 <p>
@@ -366,6 +390,7 @@ NULL-01
 </p>
 
 
+
 <p>
 
 状态：
@@ -375,6 +400,7 @@ NULL-01
 不存在
 
 </p>
+
 
 
 <p>
@@ -388,6 +414,7 @@ NULL-01
 </p>
 
 
+
 <p>
 
 记录：
@@ -398,6 +425,61 @@ NULL-01
 
 </p>
 
+
+
+<hr>
+
+
+
+<p>
+
+【残留记录】
+
+</p>
+
+
+
+<p>
+
+访问时间：
+
+<br>
+
+2026-08-17 23:41
+
+</p>
+
+
+
+<p>
+
+访问者：
+
+<br>
+
+UNKNOWN
+
+</p>
+
+
+
+<p>
+
+检测到关联文件：
+
+<br>
+
+MIRROR
+
+</p>
+
+
+
+<button onclick="location.href='mirror.html'">
+
+查看关联记录
+
+</button>
 
 `;
 
@@ -411,11 +493,14 @@ NULL-01
 
 
 
+// 其他
+
+
 else{
 
 
-
 result.innerHTML=
+
 
 `
 
@@ -435,7 +520,7 @@ result.innerHTML=
 
 
 
-},1500);
+},1200);
 
 
 
