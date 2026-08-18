@@ -24,6 +24,7 @@ color:#ff3333;
 }
 
 
+
 .hidden{
 
 display:none;
@@ -31,56 +32,15 @@ display:none;
 }
 
 
-.glitch{
-
-animation:shake .15s;
-
-}
-
-
-
-@keyframes shake{
-
-
-0%{
-
-transform:translate(0);
-
-}
-
-
-30%{
-
-transform:translate(-4px);
-
-}
-
-
-60%{
-
-transform:translate(4px);
-
-}
-
-
-100%{
-
-transform:translate(0);
-
-}
-
-
-}
-
-
 
 .flash{
 
-font-size:22px;
+font-size:24px;
 
 color:#ff3333;
 
 }
+
 
 
 </style>
@@ -93,9 +53,7 @@ color:#ff3333;
 <body>
 
 
-
 <div class="terminal">
-
 
 
 <div class="top">
@@ -103,7 +61,6 @@ color:#ff3333;
 MIRROR RECOVERY
 
 </div>
-
 
 
 
@@ -128,7 +85,7 @@ MIRROR RECOVERY
 
 <p>
 
-镜像恢复服务
+镜像恢复记录
 
 </p>
 
@@ -139,11 +96,11 @@ MIRROR RECOVERY
 
 <p>
 
-状态：
+文件：
 
 <br>
 
-恢复失败
+NULL-01
 
 </p>
 
@@ -151,11 +108,11 @@ MIRROR RECOVERY
 
 <p>
 
-缺少：
+状态：
 
 <br>
 
-原始观察者记录
+部分恢复
 
 </p>
 
@@ -175,18 +132,19 @@ MIRROR RECOVERY
 
 <p>
 
-DATE：
+访问时间：
 
 <br>
 
-2026-08-17
+2026-08-17 23:41
 
 </p>
 
 
+
 <p>
 
-USER：
+访问者：
 
 <br>
 
@@ -196,6 +154,41 @@ UNKNOWN
 
 
 
+<hr>
+
+
+
+<p>
+
+恢复结果：
+
+</p>
+
+
+
+<p class="warning">
+
+缺少：
+
+<br>
+
+原始观察者记录。
+
+</p>
+
+
+
+<p>
+
+检测到关联日志：
+
+<br>
+
+LOG-001
+
+</p>
+
+
 
 <br>
 
@@ -203,7 +196,7 @@ UNKNOWN
 
 <button onclick="location.href='ending.html'">
 
-继续
+继续读取
 
 </button>
 
@@ -243,19 +236,25 @@ let lines=[
 "",
 
 
-"读取残留数据...",
+"读取残留文件...",
 
 
 "",
 
 
-"恢复文件中...",
+"恢复数据中...",
 
 
 "",
 
 
-"恢复失败。"
+"发现未知访问记录...",
+
+
+"",
+
+
+"验证访问者..."
 
 
 
@@ -267,23 +266,27 @@ let i=0;
 
 
 
-function show(){
+function type(){
 
 
 
 if(i<lines.length){
 
 
+
 box.innerHTML+=lines[i]+"<br>";
+
 
 i++;
 
 
-setTimeout(show,900);
+setTimeout(type,700);
 
 
 
 }
+
+
 
 else{
 
@@ -297,11 +300,10 @@ document.body.classList.add("glitch");
 
 
 
-box.innerHTML+=
+box.innerHTML=
+
 
 `
-
-<br>
 
 <span class="flash">
 
@@ -319,11 +321,6 @@ setTimeout(()=>{
 box.innerHTML="";
 
 
-box.innerHTML=
-
-"恢复完成。<br><br>";
-
-
 content.style.display="block";
 
 
@@ -331,7 +328,7 @@ content.style.display="block";
 
 
 
-},1500);
+},1000);
 
 
 
@@ -343,7 +340,7 @@ content.style.display="block";
 
 
 
-show();
+type();
 
 
 
