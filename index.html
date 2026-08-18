@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NULL-01 | 遗失协议</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="terminal">
+
+
+<div class="header">
+
+NULL-01 SYSTEM
+
+</div>
+
+
+
+<div id="screen">
+
+
+<p id="boot">
+正在启动系统...
+</p>
+
+
+</div>
+
+
+
+<div id="login">
+
+
+<p>
+请输入访问权限代码：
+</p>
+
+
+<input 
+id="password"
+autocomplete="off"
+placeholder="CODE">
+
+
+<button onclick="login()">
+确认
+</button>
+
+
+</div>
+
+
+
+<div id="menu" class="hide">
+
+
+<p>
+权限通过。
+</p>
+
+
+<button onclick="openArchive()">
+打开档案库
+</button>
+
+
+<button onclick="openTerminal()">
+进入终端
+</button>
+
+
+</div>
+
+
+
+</div>
+
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
