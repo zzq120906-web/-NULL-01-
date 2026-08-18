@@ -7,226 +7,13 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NULL-01 SYSTEM</title>
+<title>
+NULL-01 SYSTEM
+</title>
+
 
 <link rel="stylesheet" href="style.css">
 
-
-<style>
-
-
-body{
-
-animation:fadeIn 2s;
-
-}
-
-
-@keyframes fadeIn{
-
-from{
-
-opacity:0;
-
-}
-
-to{
-
-opacity:1;
-
-}
-
-}
-
-
-
-.boot-box{
-
-animation:
-
-powerOn 1.8s;
-
-}
-
-
-
-@keyframes powerOn{
-
-
-0%{
-
-transform:scaleY(0);
-
-opacity:0;
-
-}
-
-
-60%{
-
-transform:scaleY(1.1);
-
-opacity:1;
-
-}
-
-
-100%{
-
-transform:scaleY(1);
-
-}
-
-}
-
-
-
-.system-title{
-
-
-font-size:28px;
-
-letter-spacing:5px;
-
-text-align:center;
-
-text-shadow:
-
-0 0 15px #00ff88;
-
-
-animation:
-
-flicker 3s infinite;
-
-
-}
-
-
-
-@keyframes flicker{
-
-
-0%,90%,100%{
-
-opacity:1;
-
-}
-
-
-92%{
-
-opacity:.4;
-
-}
-
-
-94%{
-
-opacity:1;
-
-}
-
-
-}
-
-
-
-.status-light{
-
-
-display:inline-block;
-
-width:8px;
-
-height:8px;
-
-background:#ff3333;
-
-border-radius:50%;
-
-
-box-shadow:
-
-0 0 15px #ff3333;
-
-
-animation:
-
-blink 1s infinite;
-
-
-}
-
-
-
-@keyframes blink{
-
-
-50%{
-
-opacity:.3;
-
-}
-
-
-}
-
-
-
-.scan{
-
-
-position:fixed;
-
-top:0;
-
-left:0;
-
-width:100%;
-
-height:3px;
-
-background:#00ff88;
-
-
-box-shadow:
-
-0 0 20px #00ff88;
-
-
-animation:
-
-scan 3s linear infinite;
-
-
-}
-
-
-
-@keyframes scan{
-
-
-from{
-
-top:0;
-
-}
-
-
-to{
-
-top:100%;
-
-}
-
-
-
-}
-
-
-
-</style>
 
 </head>
 
@@ -236,11 +23,12 @@ top:100%;
 
 
 
-<div class="scan"></div>
+<div class="ambient"></div>
 
 
 
-<div class="terminal boot-box">
+<div class="terminal">
+
 
 
 <div class="top">
@@ -251,22 +39,15 @@ NULL-01 SYSTEM
 
 
 
+
 <div class="screen">
 
 
-<div class="system-title">
 
-NULL-01
-
-</div>
-
-
-<br>
+<div id="main">
 
 
 <p>
-
-<span class="status-light"></span>
 
 SYSTEM STATUS：
 
@@ -279,6 +60,7 @@ OFFLINE
 </p>
 
 
+
 <p>
 
 未知系统等待访问。
@@ -286,7 +68,9 @@ OFFLINE
 </p>
 
 
+
 <br>
+
 
 
 <button onclick="startGame()">
@@ -296,11 +80,28 @@ OFFLINE
 </button>
 
 
+
+</div>
+
+
+
+
+<div id="boot" style="display:none;">
+
+
+<p id="bootText"></p>
+
+
 </div>
 
 
 
 </div>
+
+
+
+</div>
+
 
 
 
@@ -311,86 +112,106 @@ OFFLINE
 function startGame(){
 
 
+
+document
+.getElementById("main")
+.style.display="none";
+
+
+
+document
+.getElementById("boot")
+.style.display="block";
+
+
+
 document.body.classList.add("glitch");
 
 
 
-let screen=document.querySelector(".screen");
 
+let text =
 
+"正在启动 NULL-01 系统...\n\n"+
 
-screen.innerHTML=`
+"检查数据完整性...\n\n"+
 
-<p>
+"发现异常文件...\n\n"+
 
-SYSTEM BOOTING...
+"尝试恢复...\n\n"+
 
-</p>
+"警告：部分档案已删除\n\n"+
 
-<br>
+"错误代码：UNDEFINED";
 
-<p id="load">
-
-</p>
-
-`;
-
-
-
-let text=
-
-"INITIALIZING...\n\n"+
-"CHECKING FILE SYSTEM...\n\n"+
-"UNKNOWN DATA FOUND...\n\n"+
-"ACCESS GRANTED";
 
 
 
 let i=0;
 
-let box=document.getElementById("load");
+
+let box=document
+.getElementById("bootText");
+
+
 
 
 
 function typing(){
 
 
-if(i<text.length){
+
+if(i < text.length){
 
 
-if(text[i]=="\n"){
+
+if(text[i]==="\n"){
+
 
 box.innerHTML+="<br>";
 
-}
 
-else{
+
+}else{
+
 
 box.innerHTML+=text[i];
 
+
 }
+
 
 
 i++;
 
 
-setTimeout(typing,45);
+setTimeout(
+typing,
+70
+);
+
 
 
 }
+
+
 
 else{
 
 
 setTimeout(()=>{
 
-location.href="pages/log.html";
+
+window.location.href=
+"pages/log.html";
 
 
-},1200);
+},1800);
+
 
 
 }
+
 
 
 }
@@ -400,10 +221,13 @@ location.href="pages/log.html";
 typing();
 
 
+
 }
 
 
+
 </script>
+
 
 
 </body>
