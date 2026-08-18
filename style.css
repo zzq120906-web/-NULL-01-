@@ -360,3 +360,114 @@ width:100%;
 
 
 }
+/* =================
+   开幕闪屏
+================= */
+
+
+#flash{
+
+position:fixed;
+
+inset:0;
+
+background:#00ff88;
+
+opacity:0;
+
+pointer-events:none;
+
+z-index:9999;
+
+}
+
+
+
+#flash.active{
+
+
+animation:
+
+flashEffect .25s;
+
+
+}
+
+
+
+@keyframes flashEffect{
+
+
+0%{
+
+opacity:0;
+
+}
+
+
+30%{
+
+opacity:.35;
+
+}
+
+
+100%{
+
+opacity:0;
+
+}
+
+
+}
+
+
+
+
+/* 启动时终端震动 */
+
+
+#boot{
+
+
+animation:
+
+bootShake .3s;
+
+
+}
+
+
+
+@keyframes bootShake{
+
+
+0%{
+
+transform:translate(0);
+
+}
+
+
+25%{
+
+transform:translate(-3px);
+
+}
+
+
+50%{
+
+transform:translate(3px);
+
+}
+
+
+100%{
+
+transform:translate(0);
+
+}
+
+
+}
