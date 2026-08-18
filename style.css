@@ -491,3 +491,45 @@ padding:15px;
 
 
 }
+html,
+body{
+
+height:auto !important;
+
+min-height:100%;
+
+overflow-y:auto !important;
+
+overflow-x:hidden;
+
+}
+
+
+
+body{
+
+position:static !important;
+
+}
+
+
+
+.terminal{
+
+height:auto !important;
+
+min-height:100vh;
+
+}
+
+
+
+.screen{
+
+height:auto !important;
+
+max-height:none !important;
+
+overflow:visible !important;
+
+}
