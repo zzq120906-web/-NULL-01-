@@ -1,24 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 
-
 <head>
 
 <meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
 <title>
 NULL-01 DATABASE
 </title>
 
-
 <link rel="stylesheet" href="../style.css">
 
-
 </head>
-
 
 
 <body>
@@ -38,10 +33,9 @@ NULL-01 DATABASE
 <div class="screen">
 
 
-
 <p>
 
-数据库连接：
+数据库连接状态：
 
 <span class="danger">
 ONLINE
@@ -62,7 +56,6 @@ ONLINE
 <input 
 id="search"
 placeholder="ARCHIVE ID"
-autocomplete="off"
 >
 
 
@@ -76,16 +69,25 @@ autocomplete="off"
 
 
 
+<div id="result">
+
+</div>
 
 
 
+<br>
 
-<button onclick="backLog()">
 
-返回日志
+<a href="log.html">
+
+<button>
+
+返回上一页
 
 </button>
 
+</a>
+
 
 
 </div>
@@ -95,23 +97,16 @@ autocomplete="off"
 </div>
 
 
-
-
-
-<script src="../script.js"></script>
 
 
 
 <script>
 
 
-
 function searchFile(){
 
 
-let id =
-
-document
+let input = document
 .getElementById("search")
 .value
 .toUpperCase()
@@ -119,129 +114,25 @@ document
 
 
 
-let result =
+let result = document
+.getElementById("result");
 
-document.getElementById("result");
 
 
 
+if(input === "NULL"){
 
-if(id===""){
 
 
-result.innerHTML=
+result.innerHTML = `
 
-`
-
-<hr>
-
-<p>
-
-请输入档案编号。
-
-</p>
-
-`;
-
-return;
-
-
-}
-
-
-
-
-result.innerHTML=
-
-`
-
-<hr>
-
-<p>
-
-正在连接数据库...
-
-</p>
-
-`;
-
-
-
-
-setTimeout(function(){
-
-
-
-if(id==="001"){
-
-
-
-result.innerHTML=
-
-`
-
-<hr>
-
-
-<p>
-
-档案编号：
-
-001
-
-</p>
-
-
-<p>
-
-名称：
-
-系统维护记录
-
-</p>
-
-
-<p>
-
-状态：
-
-正常
-
-</p>
-
-
-<p>
-
-备注：
-
-无异常。
-
-</p>
-
-
-`;
-
-
-
-}
-
-
-
-
-else if(id==="NULL"){
-
-
-
-result.innerHTML=
-
-`
 
 <hr>
 
 
 <p class="danger">
 
-发现异常档案
+异常档案已发现
 
 </p>
 
@@ -287,10 +178,18 @@ NULL-01
 
 
 
+<br>
+
+
+
 <a href="mirror.html">
+
 <button>
+
 查看关联记录
+
 </button>
+
 </a>
 
 
@@ -298,25 +197,69 @@ NULL-01
 
 
 
-if(typeof saveClue === "function"){
-
-saveClue("NULL-01");
-
 }
 
 
 
-}
 
+else if(input === "001"){
+
+
+
+result.innerHTML = `
+
+
+<hr>
+
+
+<p>
+
+档案编号：
+
+001
+
+</p>
+
+
+<p>
+
+名称：
+
+系统维护记录
+
+</p>
+
+
+<p>
+
+状态：
+
+正常
+
+</p>
+
+
+<p>
+
+无异常信息。
+
+</p>
+
+
+`;
+
+
+
+}
 
 
 
 else{
 
 
-result.innerHTML=
 
-`
+result.innerHTML = `
+
 
 <hr>
 
@@ -343,7 +286,212 @@ result.innerHTML=
 
 
 
-},1000);
+}
+
+
+</script>
+
+
+
+</body>
+
+
+</html><!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+NULL-01 DATABASE
+</title>
+
+<link rel="stylesheet" href="../style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="terminal">
+
+
+<div class="top">
+
+NULL-01 DATABASE
+
+</div>
+
+
+
+<div class="screen">
+
+
+<p>
+
+数据库连接状态：
+
+<span class="danger">
+ONLINE
+</span>
+
+</p>
+
+
+
+<p>
+
+请输入档案编号：
+
+</p>
+
+
+
+<input 
+id="search"
+placeholder="ARCHIVE ID"
+>
+
+
+
+<button onclick="searchFile()">
+
+查询
+
+</button>
+
+
+
+
+<div id="result">
+
+</div>
+
+
+
+<br>
+
+
+<a href="log.html">
+
+<button>
+
+返回上一页
+
+</button>
+
+</a>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+function searchFile(){
+
+
+let input = document
+.getElementById("search")
+.value
+.toUpperCase()
+.trim();
+
+
+
+let result = document
+.getElementById("result");
+
+
+
+
+if(input === "NULL"){
+
+
+
+result.innerHTML = `
+
+
+<hr>
+
+
+<p class="danger">
+
+异常档案已发现
+
+</p>
+
+
+
+<p>
+
+编号：
+
+NULL-01
+
+</p>
+
+
+
+<p>
+
+状态：
+
+不存在
+
+</p>
+
+
+
+<p>
+
+创建时间：
+
+未知
+
+</p>
+
+
+
+<p>
+
+备注：
+
+该文件没有创建记录。
+
+</p>
+
+
+
+<br>
+
+
+
+<a href="mirror.html">
+
+<button>
+
+查看关联记录
+
+</button>
+
+</a>
+
+
+`;
 
 
 
@@ -352,25 +500,51 @@ result.innerHTML=
 
 
 
-
-
-function enterMirror(){
-
-
-
-document.querySelector(".terminal").style.opacity="0";
+else if(input === "001"){
 
 
 
-setTimeout(function(){
+result.innerHTML = `
 
 
-window.location.href=
-
-"mirror.html";
+<hr>
 
 
-},600);
+<p>
+
+档案编号：
+
+001
+
+</p>
+
+
+<p>
+
+名称：
+
+系统维护记录
+
+</p>
+
+
+<p>
+
+状态：
+
+正常
+
+</p>
+
+
+<p>
+
+无异常信息。
+
+</p>
+
+
+`;
 
 
 
@@ -378,18 +552,39 @@ window.location.href=
 
 
 
+else{
 
 
-function backLog(){
+
+result.innerHTML = `
 
 
-window.location.href=
+<hr>
 
-"log.html";
+
+<p>
+
+未找到档案。
+
+</p>
+
+
+<p>
+
+查询行为已记录。
+
+</p>
+
+
+`;
+
 
 
 }
 
+
+
+}
 
 
 </script>
