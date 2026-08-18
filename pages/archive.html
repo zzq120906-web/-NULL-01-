@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>NULL-01 档案库</title>
+
+<link rel="stylesheet" href="../style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="terminal">
+
+
+<div class="header">
+NULL-01 ARCHIVE
+</div>
+
+
+<div id="screen">
+
+
+<p>
+正在读取档案...
+</p>
+
+
+<br>
+
+
+<p>
+档案编号：
+NULL-01
+</p>
+
+
+<p>
+名称：
+遗失协议
+</p>
+
+
+<p>
+状态：
+异常
+</p>
+
+
+<br>
+
+
+<p>
+最后记录：
+</p>
+
+
+<p>
+"系统删除了自己的记忆。"
+</p>
+
+
+<br>
+
+
+<button onclick="file1()">
+查看文件001
+</button>
+
+
+<button onclick="back()">
+返回终端
+</button>
+
+
+<div id="file"></div>
+
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+function file1(){
+
+
+document.getElementById("file").innerHTML=`
+
+<hr>
+
+<p>
+文件001：
+
+创建时间：
+2026-08-18
+
+创建者：
+UNKNOWN
+
+内容：
+
+“如果有人找到这里，
+说明删除程序失败了。”
+
+</p>
+
+
+<p>
+隐藏代码：
+4927
+</p>
+
+`;
+
+}
+
+
+
+function back(){
+
+location.href="terminal.html";
+
+}
+
+
+</script>
+
+
+
+</body>
+
+</html>
