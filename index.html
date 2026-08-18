@@ -23,7 +23,9 @@ NULL-01 SYSTEM
 
 
 <div class="top">
+
 NULL-01 SYSTEM
+
 </div>
 
 
@@ -35,15 +37,22 @@ NULL-01 SYSTEM
 
 
 <p>
+
 SYSTEM STATUS：
+
 <span class="danger">
+
 OFFLINE
+
 </span>
+
 </p>
 
 
 <p>
+
 未知系统等待访问。
+
 </p>
 
 
@@ -64,18 +73,13 @@ OFFLINE
 <div id="boot" style="display:none;">
 
 
-<p id="bootTitle">
-
-</p>
+<p id="bootTitle"></p>
 
 
-<p id="bootText">
-
-</p>
+<p id="bootText"></p>
 
 
 </div>
-
 
 
 </div>
@@ -92,7 +96,6 @@ OFFLINE
 function startGame(){
 
 
-
 document.getElementById("main").style.display="none";
 
 
@@ -100,87 +103,148 @@ document.getElementById("boot").style.display="block";
 
 
 
-let title=
+let title =
 "NULL-01 SYSTEM\nBOOT SEQUENCE\n\n";
 
 
 
-let text=
-"正在启动系统...\n\n"+
-"检查数据完整性...\n\n"+
-"发现异常文件...\n\n"+
-"尝试恢复...\n\n"+
-"警告：部分档案已删除\n\n"+
-"错误代码：UNDEFINED";
+let logs = [
+
+"[OK] 电源模块启动",
+
+"[OK] 核心服务加载",
+
+"[OK] 数据库连接建立",
+
+"",
+
+"正在检查数据完整性...",
+
+"",
+
+"███████░░░ 73%",
+
+"",
+
+"发现未知文件...",
+
+"",
+
+"文件编号：NULL-01",
+
+"",
+
+"正在尝试恢复...",
+
+"",
+
+"恢复进度：12%",
+
+"恢复进度：27%",
+
+"恢复进度：46%",
+
+"",
+
+"错误。",
+
+"",
+
+"恢复对象不存在。",
+
+"",
+
+"重新建立索引...",
+
+"",
+
+"系统启动完成。",
+
+"",
+
+"访问者已确认。"
+
+];
 
 
 
-let titleBox=
+let titleBox =
 document.getElementById("bootTitle");
 
 
-let textBox=
+let textBox =
 document.getElementById("bootText");
 
 
 
-let i=0;
+let a=0;
 
 
 
 function typeTitle(){
 
 
-if(i<title.length){
+if(a<title.length){
 
 
-if(title[i]=="\n"){
+if(title[a]=="\n"){
 
 titleBox.innerHTML+="<br>";
 
-}else{
+}
 
-titleBox.innerHTML+=title[i];
+else{
+
+titleBox.innerHTML+=title[a];
 
 }
 
 
-i++;
+a++;
 
 
 setTimeout(typeTitle,80);
 
 
-}else{
+}
+
+else{
 
 
-let j=0;
+typeLog();
 
-
-function typeText(){
-
-
-if(j<text.length){
-
-
-if(text[j]=="\n"){
-
-textBox.innerHTML+="<br>";
-
-}else{
-
-textBox.innerHTML+=text[j];
 
 }
 
 
-j++;
+
+}
 
 
-setTimeout(typeText,60);
 
 
-}else{
+let b=0;
+
+
+
+function typeLog(){
+
+
+if(b<logs.length){
+
+
+textBox.innerHTML += logs[b]+"<br>";
+
+
+b++;
+
+
+setTimeout(typeLog,350);
+
+
+}
+
+else{
 
 
 setTimeout(()=>{
@@ -192,22 +256,13 @@ window.location.href="pages/log.html";
 },2500);
 
 
-
-}
-
-
-}
-
-
-typeText();
-
-
-
 }
 
 
 
 }
+
+
 
 
 typeTitle();
