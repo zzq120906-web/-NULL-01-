@@ -1,81 +1,76 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 
+
 <head>
 
 <meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NULL-01：遗失协议</title>
+
+<title>
+
+NULL-01 SYSTEM
+
+</title>
+
 
 <link rel="stylesheet" href="style.css">
+
 
 </head>
 
 
+
 <body>
-
-
-<div class="noise"></div>
 
 
 
 <div class="terminal">
 
 
+
 <div class="top">
 
-NULL-01 // LOST PROTOCOL
+NULL-01 SYSTEM
 
 </div>
 
-
-
-<div class="status">
-
-SYSTEM STATUS:
-<span class="danger">
-UNSTABLE
-</span>
-
-</div>
 
 
 
 <div class="screen">
 
 
-<p id="typing"></p>
 
+<div id="main">
 
-
-<div class="panel">
 
 
 <p>
-恢复任务：
-NULL-01
-</p>
 
+SYSTEM STATUS：
 
-<p>
-数据完整度：
-<span id="percent">
-37%
+<span class="danger">
+
+OFFLINE
+
 </span>
+
 </p>
+
 
 
 <p>
-发现异常文件：
-<span class="warning">
-1
-</span>
+
+未知系统等待访问。
+
 </p>
 
 
-</div>
+
+<br>
 
 
 
@@ -91,11 +86,14 @@ NULL-01
 
 
 
-<div class="footer">
 
-© NULL CORPORATION
-<br>
-Unauthorized access will be recorded.
+<div id="boot" style="display:none;">
+
+
+<p id="bootText">
+
+</p>
+
 
 </div>
 
@@ -105,9 +103,134 @@ Unauthorized access will be recorded.
 
 
 
-<script src="script.js"></script>
+</div>
+
+
+
+
+
+<script>
+
+
+
+function startGame(){
+
+
+
+document
+.getElementById("main")
+.style.display="none";
+
+
+
+document
+.getElementById("boot")
+.style.display="block";
+
+
+
+
+let text =
+
+"正在启动 NULL-01 系统...\n\n"+
+
+"检查数据完整性...\n\n"+
+
+"发现异常文件...\n\n"+
+
+"尝试恢复...\n\n"+
+
+"警告：部分档案已删除\n\n"+
+
+"错误代码：UNDEFINED";
+
+
+
+
+let i=0;
+
+
+let box=document
+.getElementById("bootText");
+
+
+
+
+
+function typing(){
+
+
+
+if(i < text.length){
+
+
+
+if(text[i]==="\n"){
+
+
+box.innerHTML+="<br>";
+
+
+
+}else{
+
+
+box.innerHTML+=text[i];
+
+
+}
+
+
+
+i++;
+
+
+setTimeout(
+typing,
+70
+);
+
+
+
+}
+
+
+
+else{
+
+
+setTimeout(()=>{
+
+
+window.location.href=
+"pages/log.html";
+
+
+},2000);
+
+
+
+}
+
+
+
+}
+
+
+
+typing();
+
+
+
+}
+
+
+
+</script>
+
 
 
 </body>
+
 
 </html>
