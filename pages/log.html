@@ -16,22 +16,24 @@ LOG-000
 
 <style>
 
-#page{
+.screen{
 
-line-height:1.8;
+font-size:15px;
+
+line-height:1.5;
+
+padding:15px;
 
 }
-
 
 
 .data{
 
-letter-spacing:4px;
+letter-spacing:3px;
 
-line-height:2;
+text-align:center;
 
 }
-
 
 
 .warning{
@@ -42,39 +44,44 @@ color:#ff3333;
 
 
 
-.glitch{
+#analysis{
 
-animation:glitch .15s;
+margin-top:10px;
+
+}
+
+
+
+button{
+
+margin-top:10px;
+
+margin-bottom:10px;
 
 }
 
 
 
-@keyframes glitch{
+@media(max-width:768px){
 
-0%{
 
-transform:translate(0);
+.screen{
 
-}
+font-size:12px;
 
-30%{
-
-transform:translate(-4px);
+padding:10px;
 
 }
 
-60%{
 
-transform:translate(4px);
 
-}
+.data{
 
-100%{
-
-transform:translate(0);
+letter-spacing:2px;
 
 }
+
+
 
 }
 
@@ -83,7 +90,6 @@ transform:translate(0);
 
 
 </head>
-
 
 
 <body>
@@ -103,7 +109,14 @@ NULL-01 SYSTEM
 <div class="screen">
 
 
-<div id="page"></div>
+<div id="page">
+
+
+<p id="loading">
+
+正在读取日志文件...
+
+</p>
 
 
 
@@ -114,6 +127,7 @@ NULL-01 SYSTEM
 </div>
 
 
+</div>
 
 
 
@@ -125,94 +139,23 @@ let page=document.getElementById("page");
 
 
 
-let bootText=
-
-"正在读取日志文件...\n\n"+
-
-"文件完整度：47%\n\n"+
-
-"警告：部分内容无法恢复。";
-
-
-
-let i=0;
-
-
-
-function boot(){
-
-
-
-if(i<bootText.length){
-
-
-
-let c=bootText[i];
-
-
-
-if(c=="\n"){
-
-page.innerHTML+="<br>";
-
-}
-
-else{
-
-page.innerHTML+=c;
-
-}
-
-
-
-i++;
-
-
-setTimeout(boot,70);
-
-
-
-}
-
-else{
-
-
-
-setTimeout(showLog,1000);
-
-
-
-}
-
-
-
-}
-
-
-
-function showLog(){
-
+setTimeout(()=>{
 
 
 page.innerHTML=`
 
 <p>
 
-LOG-000
+<b>LOG-000</b>
 
 <br>
 
-//
-
-<br>
-
-RECOVERY FILE
+// RECOVERY FILE
 
 </p>
 
 
 <hr>
-
 
 
 <p>
@@ -231,19 +174,11 @@ RECOVERY FILE
 
 
 
-<hr>
-
-
-
 <p>
 
 【系统恢复记录】
 
-</p>
-
-
-
-<p>
+<br>
 
 第一次异常发生于系统重启之前。
 
@@ -253,27 +188,11 @@ RECOVERY FILE
 
 <p>
 
-删除请求：
-
-已执行。
+删除请求：已执行
 
 <br>
 
-恢复请求：
-
-已执行。
-
-</p>
-
-
-
-<p>
-
-当前状态：
-
-<br>
-
-部分文件仍然存在。
+恢复请求：已执行
 
 </p>
 
@@ -327,13 +246,9 @@ RECOVERY FILE
 
 
 
-<br>
-
-
-
 <p>
 
-数据完整度：
+完整度：
 
 47%
 
@@ -341,13 +256,7 @@ RECOVERY FILE
 
 来源：
 
-未知
-
-<br>
-
-类型：
-
-无法识别
+UNKNOWN
 
 </p>
 
@@ -360,36 +269,35 @@ RECOVERY FILE
 </button>
 
 
-
 <div id="analysis"></div>
+
 
 
 `;
 
 
 
-}
+},1500);
+
+
 
 
 
 function analyze(){
 
 
-
 let box=document.getElementById("analysis");
 
 
 
-box.innerHTML=
-
-`
+box.innerHTML=`
 
 <hr>
 
 
 <p>
 
-正在分析残留字符...
+正在分析...
 
 </p>
 
@@ -401,7 +309,6 @@ box.innerHTML=
 </p>
 
 
-
 <p>
 
 恢复片段：
@@ -410,20 +317,13 @@ box.innerHTML=
 
 N U L L
 
-</p>
-
-
-
-<p>
+<br>
 
 附加索引：
-
-<br>
 
 01
 
 </p>
-
 
 
 <p>
@@ -431,7 +331,6 @@ N U L L
 发现未知数据库入口。
 
 </p>
-
 
 
 <button onclick="location.href='archive.html'">
@@ -444,32 +343,14 @@ N U L L
 
 
 
-document.body.classList.add("glitch");
-
-
-
-setTimeout(()=>{
-
-
-document.body.classList.remove("glitch");
-
-
-},200);
-
-
-
 }
-
-
-
-boot();
 
 
 
 </script>
 
 
-
 </body>
+
 
 </html>
