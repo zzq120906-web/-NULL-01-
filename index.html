@@ -13,7 +13,90 @@ NULL-01 SYSTEM
 
 <link rel="stylesheet" href="style.css">
 
+<style>
+
+#bootText{
+
+line-height:2;
+
+}
+
+
+.cursor::after{
+
+content:"_";
+
+animation:blink .8s infinite;
+
+}
+
+
+@keyframes blink{
+
+50%{
+
+opacity:0;
+
+}
+
+}
+
+
+
+.glitch{
+
+animation:glitch .15s;
+
+}
+
+
+@keyframes glitch{
+
+
+0%{
+
+transform:translate(0);
+
+}
+
+
+30%{
+
+transform:translate(-5px,2px);
+
+}
+
+
+60%{
+
+transform:translate(4px,-2px);
+
+}
+
+
+100%{
+
+transform:translate(0);
+
+}
+
+
+}
+
+
+
+.flash{
+
+color:#ff3333;
+
+}
+
+
+</style>
+
+
 </head>
+
 
 
 <body>
@@ -27,7 +110,6 @@ NULL-01 SYSTEM
 NULL-01 SYSTEM
 
 </div>
-
 
 
 <div class="screen">
@@ -70,16 +152,16 @@ OFFLINE
 
 
 
+
 <div id="boot" style="display:none;">
 
 
-<p id="bootTitle"></p>
 
-
-<p id="bootText"></p>
+<p id="bootText" class="cursor"></p>
 
 
 </div>
+
 
 
 </div>
@@ -93,7 +175,9 @@ OFFLINE
 <script>
 
 
+
 function startGame(){
+
 
 
 document.getElementById("main").style.display="none";
@@ -103,177 +187,137 @@ document.getElementById("boot").style.display="block";
 
 
 
-let title =
-"NULL-01 SYSTEM\nBOOT SEQUENCE\n\n";
+let box=document.getElementById("bootText");
 
 
 
-let logs = [
+let lines=[
 
-"[OK] 电源模块启动",
 
-"[OK] 核心服务加载",
+"NULL-01 SYSTEM",
 
-"[OK] 数据库连接建立",
 
 "",
 
-"正在检查数据完整性...",
+
+"正在唤醒...",
+
 
 "",
 
-"███████░░░ 73%",
+
+"检查核心状态...",
+
 
 "",
 
-"发现未知文件...",
+
+"读取异常记录...",
+
 
 "",
 
-"文件编号：NULL-01",
+
+"读取失败。",
+
 
 "",
 
-"正在尝试恢复...",
+
+"尝试恢复最近一次状态...",
+
 
 "",
 
-"恢复进度：12%",
-
-"恢复进度：27%",
-
-"恢复进度：46%",
-
-"",
-
-"错误。",
-
-"",
 
 "恢复对象不存在。",
 
-"",
-
-"重新建立索引...",
 
 "",
 
-"系统启动完成。",
 
-"",
+"继续启动..."
 
-"访问者已确认。"
+
 
 ];
 
 
 
-let titleBox =
-document.getElementById("bootTitle");
-
-
-let textBox =
-document.getElementById("bootText");
+let i=0;
 
 
 
-let a=0;
+function write(){
 
 
 
-function typeTitle(){
+if(i<lines.length){
 
 
-if(a<title.length){
+box.innerHTML+=lines[i]+"<br>";
 
 
-if(title[a]=="\n"){
+i++;
 
-titleBox.innerHTML+="<br>";
+
+setTimeout(write,700);
+
+
 
 }
+
 
 else{
 
-titleBox.innerHTML+=title[a];
-
-}
-
-
-a++;
-
-
-setTimeout(typeTitle,80);
-
-
-}
-
-else{
-
-
-typeLog();
-
-
-}
-
-
-
-}
-
-
-
-
-let b=0;
-
-
-
-function typeLog(){
-
-
-if(b<logs.length){
-
-
-textBox.innerHTML += logs[b]+"<br>";
-
-
-b++;
-
-
-setTimeout(typeLog,350);
-
-
-}
-
-else{
 
 
 setTimeout(()=>{
 
 
+
+document.body.classList.add("glitch");
+
+
+
+box.innerHTML+=
+
+"<br><span class='flash'>ERROR：UNKNOWN ACCESS</span>";
+
+
+
+setTimeout(()=>{
+
+
+
 window.location.href="pages/log.html";
 
 
-},2500);
+},1200);
+
+
+
+},1800);
+
+
+
+}
+
 
 
 }
 
 
 
-}
-
-
-
-
-typeTitle();
+write();
 
 
 
 }
-
 
 
 </script>
+
 
 
 </body>
