@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 
+
 <head>
 
 <meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
+
 <title>
+
 NULL-01 | LOG-000
+
 </title>
 
 
 <link rel="stylesheet" href="../style.css">
+
 
 </head>
 
@@ -21,44 +26,59 @@ NULL-01 | LOG-000
 <body>
 
 
+
 <div class="terminal">
 
 
-<div class="header">
 
-LOG-000 / RECOVERY FILE
+<div class="top">
+
+LOG-000 // RECOVERY FILE
 
 </div>
 
 
 
-<div class="content">
+<div class="screen">
 
 
-<p>
+
+<p id="load">
+
 正在读取日志文件...
+
 </p>
 
 
-<hr>
+
+<div id="content" style="display:none;">
 
 
 
 <p>
+
 编号：
+
 LOG-000
+
 </p>
 
 
 <p>
+
 创建时间：
+
 2026-08-18
+
 </p>
 
 
 <p>
+
 记录者：
+
 UNKNOWN
+
 </p>
 
 
@@ -74,11 +94,13 @@ UNKNOWN
 </p>
 
 
+
 <p>
 
 系统第一次错误发生于重启之前。
 
 </p>
+
 
 
 <p>
@@ -88,6 +110,7 @@ UNKNOWN
 </p>
 
 
+
 <p>
 
 但是：
@@ -95,7 +118,8 @@ UNKNOWN
 </p>
 
 
-<p>
+
+<p class="danger">
 
 ████████仍然存在。
 
@@ -109,75 +133,108 @@ UNKNOWN
 
 <p>
 
-附加文件：
+附加数据：
 
 </p>
 
 
-<button onclick="openFile()">
 
-打开损坏文件
+<button onclick="decode()">
 
-</button>
-
-
-
-<div id="file">
-
-</div>
-
-
-
-<br>
-
-
-<button onclick="backHome()">
-
-返回主页
+读取损坏数据
 
 </button>
 
 
 
+<div id="data">
+
+</div>
+
+
+
+
+<button onclick="goArchive()">
+
+进入档案数据库
+
+</button>
+
+
+
+
 </div>
 
 
 
 </div>
+
+
+
+</div>
+
+
 
 
 
 
 <script>
 
-function openFile(){
 
 
-let file=document.getElementById("file");
+setTimeout(()=>{
 
 
-file.innerHTML=`
+document.getElementById("load").innerHTML=
+
+"日志恢复完成。";
+
+
+document.getElementById("content").style.display=
+
+"block";
+
+
+},2000);
+
+
+
+
+
+function decode(){
+
+
+document.getElementById("data").innerHTML=
+
+`
 
 <hr>
 
+
 <p>
+
 CORRUPTED_DATA_001
+
 </p>
 
 
 <p>
 
-01001110 
-01010101 
-01001100 
+01001110
+
+01010101
+
+01001100
+
 01001100
 
 </p>
 
 
+
 <p>
 
-解析结果：
+二进制解析：
 
 NULL
 
@@ -186,41 +243,44 @@ NULL
 
 <p>
 
-隐藏信息：
+获得线索：
 
-"寻找不存在的记录"
+NULL
 
 </p>
 
+
 `;
 
+
+saveClue("NULL");
+
+
 }
 
 
 
-function backHome(){
 
-window.location.href="../index.html";
+function goArchive(){
+
+
+window.location.href=
+
+"archive.html";
+
 
 }
+
+
 
 </script>
 
 
-function backHome(){
 
-
-window.location.href="../index.html";
-
-
-}
-
-
-
-</script>
-
+<script src="../script.js"></script>
 
 
 </body>
+
 
 </html>
