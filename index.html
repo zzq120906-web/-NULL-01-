@@ -1,77 +1,53 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 
-
 <head>
 
 <meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
 <title>
-
 NULL-01 SYSTEM
-
 </title>
-
 
 <link rel="stylesheet" href="style.css">
 
-
 </head>
-
 
 
 <body>
 
 
-
 <div class="terminal">
 
 
-
 <div class="top">
-
 NULL-01 SYSTEM
-
 </div>
-
 
 
 
 <div class="screen">
 
 
-
 <div id="main">
 
 
-
 <p>
-
 SYSTEM STATUS：
-
 <span class="danger">
-
 OFFLINE
-
 </span>
-
 </p>
-
 
 
 <p>
-
 未知系统等待访问。
-
 </p>
-
 
 
 <br>
-
 
 
 <button onclick="startGame()">
@@ -81,13 +57,16 @@ OFFLINE
 </button>
 
 
-
 </div>
 
 
 
-
 <div id="boot" style="display:none;">
+
+
+<p id="bootTitle">
+
+</p>
 
 
 <p id="bootText">
@@ -102,9 +81,7 @@ OFFLINE
 </div>
 
 
-
 </div>
-
 
 
 
@@ -112,101 +89,117 @@ OFFLINE
 <script>
 
 
-
 function startGame(){
 
 
 
-document
-.getElementById("main")
-.style.display="none";
+document.getElementById("main").style.display="none";
+
+
+document.getElementById("boot").style.display="block";
 
 
 
-document
-.getElementById("boot")
-.style.display="block";
+let title=
+"NULL-01 SYSTEM\nBOOT SEQUENCE\n\n";
 
 
 
-
-let text =
-
-"正在启动 NULL-01 系统...\n\n"+
-
+let text=
+"正在启动系统...\n\n"+
 "检查数据完整性...\n\n"+
-
 "发现异常文件...\n\n"+
-
 "尝试恢复...\n\n"+
-
 "警告：部分档案已删除\n\n"+
-
 "错误代码：UNDEFINED";
 
+
+
+let titleBox=
+document.getElementById("bootTitle");
+
+
+let textBox=
+document.getElementById("bootText");
 
 
 
 let i=0;
 
 
-let box=document
-.getElementById("bootText");
+
+function typeTitle(){
 
 
+if(i<title.length){
 
 
+if(title[i]=="\n"){
 
-function typing(){
-
-
-
-if(i < text.length){
-
-
-
-if(text[i]==="\n"){
-
-
-box.innerHTML+="<br>";
-
-
+titleBox.innerHTML+="<br>";
 
 }else{
 
-
-box.innerHTML+=text[i];
-
+titleBox.innerHTML+=title[i];
 
 }
-
 
 
 i++;
 
 
-setTimeout(
-typing,
-70
-);
+setTimeout(typeTitle,80);
 
 
+}else{
+
+
+let j=0;
+
+
+function typeText(){
+
+
+if(j<text.length){
+
+
+if(text[j]=="\n"){
+
+textBox.innerHTML+="<br>";
+
+}else{
+
+textBox.innerHTML+=text[j];
 
 }
 
 
+j++;
 
-else{
+
+setTimeout(typeText,60);
+
+
+}else{
 
 
 setTimeout(()=>{
 
 
-window.location.href=
-"pages/log.html";
+window.location.href="pages/log.html";
 
 
-},2000);
+},2500);
+
+
+
+}
+
+
+}
+
+
+typeText();
 
 
 
@@ -217,8 +210,7 @@ window.location.href=
 }
 
 
-
-typing();
+typeTitle();
 
 
 
@@ -229,8 +221,6 @@ typing();
 </script>
 
 
-
 </body>
-
 
 </html>
