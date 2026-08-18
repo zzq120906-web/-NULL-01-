@@ -1,14 +1,17 @@
-// NULL-01 SYSTEM CORE
+// NULL-01 CORE SYSTEM
 
 
 window.onload = function(){
 
-    let box = document.getElementById("typing");
+    const box = document.getElementById("typing");
 
     if(box){
 
-        let text = 
-        "正在启动 NULL-01 系统...\n\n检查核心文件...\n\n发现异常记录...\n\n恢复协议加载中...";
+        const text =
+        "正在启动 NULL-01 系统...\n\n" +
+        "检查核心文件...\n\n" +
+        "发现异常记录...\n\n" +
+        "恢复协议加载中...";
 
 
         let i = 0;
@@ -22,7 +25,7 @@ window.onload = function(){
 
                 i++;
 
-                setTimeout(type,60);
+                setTimeout(type,50);
 
             }
 
@@ -38,9 +41,51 @@ window.onload = function(){
 
 
 
+// 进入系统
 
 function startGame(){
 
-    window.location.href = "pages/log.html";
+
+    localStorage.setItem(
+        "NULL01_PROGRESS",
+        "START"
+    );
+
+
+    window.location.href =
+    "pages/log.html";
+
+
+}
+
+
+
+
+// 保存线索
+
+function saveClue(clue){
+
+
+    let data =
+    JSON.parse(
+        localStorage.getItem("NULL01_CLUES")
+        || "[]"
+    );
+
+
+    if(!data.includes(clue)){
+
+
+        data.push(clue);
+
+
+        localStorage.setItem(
+            "NULL01_CLUES",
+            JSON.stringify(data)
+        );
+
+
+    }
+
 
 }
