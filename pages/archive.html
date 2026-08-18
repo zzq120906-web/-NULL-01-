@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 
+
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>NULL-01 档案库</title>
+
+<title>
+NULL-01 | ARCHIVE
+</title>
+
 
 <link rel="stylesheet" href="../style.css">
 
+
 </head>
+
 
 
 <body>
@@ -20,121 +28,235 @@
 
 
 <div class="header">
-NULL-01 ARCHIVE
+
+NULL-01 DATABASE
+
 </div>
 
 
-<div id="screen">
 
 
-<p>
-正在读取档案...
-</p>
+<div class="content">
 
-
-<br>
 
 
 <p>
-档案编号：
-NULL-01
+
+数据库连接成功。
+
 </p>
 
 
 <p>
-名称：
-遗失协议
+
+可查询档案：
+
 </p>
 
 
-<p>
-状态：
-异常
-</p>
 
+<button onclick="openArchive('001')">
 
-<br>
+档案 001
 
-
-<p>
-最后记录：
-</p>
-
-
-<p>
-"系统删除了自己的记忆。"
-</p>
-
-
-<br>
-
-
-<button onclick="file1()">
-查看文件001
 </button>
+
+
+<button onclick="openArchive('002')">
+
+档案 002
+
+</button>
+
+
+<button onclick="openArchive('NULL')">
+
+异常档案
+
+</button>
+
+
+
+
+<div id="result">
+
+
+</div>
+
+
+
+<br>
 
 
 <button onclick="back()">
-返回终端
+
+返回日志
+
 </button>
 
 
-<div id="file"></div>
-
 
 </div>
 
 
 </div>
+
 
 
 
 <script>
 
 
-function file1(){
+
+function openArchive(id){
 
 
-document.getElementById("file").innerHTML=`
+let result =
+document.getElementById("result");
+
+
+
+if(id==="001"){
+
+
+result.innerHTML=
+
+`
 
 <hr>
 
 <p>
-文件001：
+档案001
+</p>
 
-创建时间：
-2026-08-18
 
-创建者：
-UNKNOWN
+<p>
+状态：
+已删除
+</p>
+
+
+<p>
 
 内容：
 
-“如果有人找到这里，
-说明删除程序失败了。”
+普通系统维护记录。
+
+</p>
+
+`;
+
+
+}
+
+
+
+else if(id==="002"){
+
+
+result.innerHTML=
+
+`
+
+<hr>
+
+<p>
+档案002
+</p>
+
+
+<p>
+状态：
+
+访问失败
 
 </p>
 
 
 <p>
-隐藏代码：
-4927
+
+权限不足。
+
 </p>
 
 `;
 
+
+
 }
+
+
+
+else if(id==="NULL"){
+
+
+
+result.innerHTML=
+
+`
+
+<hr>
+
+
+<p>
+发现异常档案：
+
+NULL-01
+
+</p>
+
+
+<p>
+
+状态：
+
+不应该存在
+
+</p>
+
+
+<p>
+
+备注：
+
+此档案没有创建记录。
+
+</p>
+
+
+<p>
+
+下一步线索：
+
+SEARCH : "ZERO"
+
+</p>
+
+
+`;
+
+
+
+}
+
+
+
+}
+
 
 
 
 function back(){
 
-location.href="terminal.html";
+
+window.location.href="log.html";
+
 
 }
 
 
 </script>
+
 
 
 
