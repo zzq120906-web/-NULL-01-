@@ -1,30 +1,54 @@
 *{
-
-box-sizing:border-box;
-
+    box-sizing:border-box;
 }
-
 
 
 body{
 
-margin:0;
+    margin:0;
 
-height:100vh;
+    height:100vh;
 
-background:#020202;
+    background:#020202;
 
-display:flex;
+    display:flex;
 
-justify-content:center;
+    justify-content:center;
 
-align-items:center;
+    align-items:center;
 
-font-family:
-"Courier New",
-monospace;
+    font-family:
+    "Courier New",
+    monospace;
 
-color:#00ff88;
+    color:#00ff88;
+
+    overflow:hidden;
+
+}
+
+
+/* 扫描线效果 */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+
+    repeating-linear-gradient(
+        0deg,
+        rgba(0,255,136,0.03),
+        rgba(0,255,136,0.03) 1px,
+        transparent 1px,
+        transparent 4px
+    );
+
+    pointer-events:none;
 
 }
 
@@ -32,18 +56,43 @@ color:#00ff88;
 
 .terminal{
 
-width:90%;
+    width:90%;
 
-max-width:700px;
+    max-width:700px;
 
-min-height:450px;
+    min-height:450px;
 
-border:1px solid #00ff88;
+    border:1px solid #00ff88;
 
-padding:25px;
+    padding:25px;
 
-box-shadow:
-0 0 20px rgba(0,255,136,.5);
+    box-shadow:
+
+    0 0 20px rgba(0,255,136,.4);
+
+    animation:load 1s;
+
+}
+
+
+
+@keyframes load{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
 
 }
 
@@ -51,45 +100,61 @@ box-shadow:
 
 .header{
 
-font-size:22px;
+    font-size:22px;
 
-border-bottom:1px solid #00ff88;
+    letter-spacing:3px;
 
-padding-bottom:15px;
+    padding-bottom:15px;
 
-margin-bottom:20px;
+    border-bottom:1px solid #00ff88;
 
-}
-
-
-
-#screen{
-
-min-height:150px;
-
-line-height:1.8;
+    margin-bottom:25px;
 
 }
 
 
 
-input{
+.content{
 
-background:#111;
+    line-height:2;
 
-border:2px solid #00ff88;
+}
 
-color:#00ff88;
 
-padding:12px;
 
-width:70%;
+.error{
 
-font-family:inherit;
+    color:red;
 
-font-size:16px;
+    animation:blink 1s infinite;
 
-outline:none;
+}
+
+
+
+@keyframes blink{
+
+50%{
+
+opacity:.4;
+
+}
+
+}
+
+
+
+hr{
+
+    border:
+
+    0;
+
+    border-top:
+
+    1px solid #00ff88;
+
+    margin:25px 0;
 
 }
 
@@ -97,21 +162,23 @@ outline:none;
 
 button{
 
-background:#000;
+    margin-top:20px;
 
-border:
+    padding:12px 30px;
 
-1px solid #00ff88;
+    background:#000;
 
-color:#00ff88;
+    color:#00ff88;
 
-padding:12px 20px;
+    border:
 
-margin-top:15px;
+    1px solid #00ff88;
 
-cursor:pointer;
+    font-family:inherit;
 
-font-family:inherit;
+    cursor:pointer;
+
+    transition:.3s;
 
 }
 
@@ -119,19 +186,24 @@ font-family:inherit;
 
 button:hover{
 
-background:#00ff88;
+    background:#00ff88;
 
-color:#000;
+    color:#000;
+
+}
+
+
+
+.footer{
+
+    margin-top:40px;
+
+    font-size:12px;
+
+    opacity:.5;
 
 }
 
-
-
-.hide{
-
-display:none;
-
-}
 
 
 
@@ -140,9 +212,11 @@ display:none;
 
 .terminal{
 
-width:95%;
+    width:95%;
 
-padding:15px;
+    min-height:400px;
+
+    padding:18px;
 
 }
 
@@ -150,14 +224,7 @@ padding:15px;
 
 .header{
 
-font-size:18px;
-
-}
-
-
-input{
-
-width:100%;
+    font-size:17px;
 
 }
 
@@ -165,7 +232,7 @@ width:100%;
 
 button{
 
-width:100%;
+    width:100%;
 
 }
 
