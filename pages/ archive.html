@@ -1,56 +1,76 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 
+
 <head>
 
 <meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
+
 <title>
+
 NULL-01 DATABASE
+
 </title>
+
 
 <link rel="stylesheet" href="../style.css">
 
+
 </head>
+
 
 
 <body>
 
 
+
 <div class="terminal">
 
 
-<div class="header">
+
+<div class="top">
 
 NULL-01 DATABASE
 
 </div>
 
 
-<div class="content">
+
+
+<div class="screen">
+
 
 
 <p>
-数据库连接状态：
-<span class="error">
+
+数据库连接：
+
+<span class="danger">
+
 ONLINE
+
 </span>
+
 </p>
+
 
 
 <p>
-请输入档案编号进行查询：
+
+请输入档案编号：
+
 </p>
+
 
 
 <input 
 id="search"
-placeholder="ARCHIVE ID">
+placeholder="ARCHIVE ID"
+>
 
-
-<br>
 
 
 <button onclick="searchFile()">
@@ -63,18 +83,8 @@ placeholder="ARCHIVE ID">
 
 <div id="result">
 
+
 </div>
-
-
-
-<br>
-
-
-<button onclick="back()">
-
-返回日志
-
-</button>
 
 
 
@@ -82,53 +92,107 @@ placeholder="ARCHIVE ID">
 
 
 </div>
+
+
+
+
+<script src="../script.js"></script>
 
 
 
 <script>
 
 
+
 function searchFile(){
 
 
+
 let id =
-document.getElementById("search").value
-.toUpperCase();
+
+document
+.getElementById("search")
+.value
+.toUpperCase()
+.trim();
+
+
 
 
 let result =
+
 document.getElementById("result");
+
+
+
+
+
+result.innerHTML=
+
+`
+
+<hr>
+
+<p>
+
+正在查询数据库...
+
+</p>
+
+`;
+
+
+
+
+setTimeout(()=>{
+
+
 
 
 
 if(id==="001"){
 
 
-result.innerHTML=`
+
+result.innerHTML=
+
+`
 
 <hr>
 
+
 <p>
-档案编号：001
+
+档案：
+
+001
+
 </p>
 
 
 <p>
+
 名称：
+
 系统维护记录
+
 </p>
 
 
 <p>
+
 状态：
-已归档
+
+正常
+
 </p>
 
 
 <p>
-内容：
 
-普通服务器维护文件。
+备注：
+
+无异常。
 
 </p>
 
@@ -140,25 +204,35 @@ result.innerHTML=`
 
 
 
-else if(id==="NULL-01"){
 
 
-result.innerHTML=`
+else if(id==="NULL"){
+
+
+
+result.innerHTML=
+
+`
 
 <hr>
 
-<p>
-警告：
+
+<p class="danger">
+
 发现异常档案
+
 </p>
+
 
 
 <p>
 
 编号：
+
 NULL-01
 
 </p>
+
 
 
 <p>
@@ -170,6 +244,7 @@ NULL-01
 </p>
 
 
+
 <p>
 
 创建时间：
@@ -179,27 +254,28 @@ NULL-01
 </p>
 
 
-<br>
-
 
 <p>
 
-附加备注：
+备注：
 
-"不要相信删除记录。"
+该文件没有创建记录。
 
 </p>
 
 
-<p>
+<button onclick="mirror()">
 
-新线索：
+查看关联记录
 
-MIRROR
+</button>
 
-</p>
 
 `;
+
+
+
+saveClue("NULL-01");
 
 
 
@@ -207,12 +283,16 @@ MIRROR
 
 
 
+
 else{
 
 
-result.innerHTML=`
+result.innerHTML=
+
+`
 
 <hr>
+
 
 <p>
 
@@ -223,32 +303,53 @@ result.innerHTML=`
 
 <p>
 
-查询记录已保存。
+查询行为已记录。
 
 </p>
 
 `;
 
-}
 
 
 }
 
 
 
-function back(){
 
+},1200);
 
-window.location.href="log.html";
 
 
 }
+
+
+
+
+
+
+function mirror(){
+
+
+saveClue("MIRROR");
+
+
+
+window.location.href=
+
+"mirror.html";
+
+
+}
+
+
 
 
 </script>
 
 
 
+
 </body>
+
 
 </html>
