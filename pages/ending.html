@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>
-NULL-01 ENDING
+NULL-01 SYSTEM
 </title>
 
 <link rel="stylesheet" href="../style.css">
@@ -17,23 +17,31 @@ NULL-01 ENDING
 <style>
 
 
-.notice{
+.warning{
 
 color:#ff3333;
 
 }
 
 
-.hidden{
 
-opacity:0;
+.hidden-file{
 
-animation:show 1s forwards;
+animation:appear 1s;
 
 }
 
 
-@keyframes show{
+
+@keyframes appear{
+
+
+from{
+
+opacity:0;
+
+}
+
 
 to{
 
@@ -41,8 +49,8 @@ opacity:1;
 
 }
 
-}
 
+}
 
 
 </style>
@@ -68,24 +76,11 @@ NULL-01 SYSTEM
 
 
 
-
 <div class="screen">
 
 
 
-<div id="text"></div>
-
-
-
-<br>
-
-
-
-<button onclick="location.href='../index.html'">
-
-返回系统
-
-</button>
+<p id="text"></p>
 
 
 
@@ -107,7 +102,7 @@ let box=document.getElementById("text");
 
 
 
-let content=[
+let lines=[
 
 
 "第一阶段恢复完成。",
@@ -122,40 +117,46 @@ let content=[
 "",
 
 
-"但是检测到新的问题。",
+"系统检测到多个异常。",
 
 
 "",
 
 
-"该档案创建时间：2026-08-17",
+"异常一：",
 
 
-"系统首次启动时间：2026-08-18",
-
-
-"",
-
-
-"时间记录存在冲突。",
+"档案不存在。",
 
 
 "",
 
 
-"正在寻找创建者...",
+"异常二：",
+
+
+"档案拥有访问记录。",
 
 
 "",
 
 
-"查询结果：",
+"异常三：",
+
+
+"访问发生于系统启动之前。",
 
 
 "",
 
 
-"UNKNOWN"
+"正在查询访问者信息...",
+
+
+"",
+
+
+"查询结果：UNKNOWN"
 
 
 
@@ -171,24 +172,52 @@ function type(){
 
 
 
-if(i<content.length){
+if(i<lines.length){
 
 
 
-box.innerHTML+=content[i]+"<br>";
+box.innerHTML+=lines[i]+"<br>";
 
 
 i++;
 
 
-setTimeout(type,700);
+setTimeout(type,650);
 
 
 
 }
 
 
+
 else{
+
+
+
+setTimeout(()=>{
+
+
+
+box.innerHTML+=
+
+
+`
+
+<br>
+<hr>
+
+<p class="warning hidden-file">
+
+发现未读取文件：
+
+<br><br>
+
+LOG-001
+
+</p>
+
+
+`;
 
 
 
@@ -202,22 +231,17 @@ box.innerHTML+=
 
 <br>
 
-<p class="notice">
-
-[新记录]
-
-</p>
-
+文件状态：
 
 <br>
 
-发现未读取文件：
-
-<br>
-
-LOG-001
+等待恢复。
 
 `;
+
+
+
+},1200);
 
 
 
@@ -238,6 +262,7 @@ type();
 
 
 </script>
+
 
 
 
