@@ -42,6 +42,7 @@ ERROR<br>
 
 
 
+
 <div class="terminal">
 
 
@@ -61,12 +62,10 @@ NULL-01 SYSTEM
 
 
 <p id="status">
-
 </p>
 
 
 <p id="intro">
-
 </p>
 
 
@@ -85,10 +84,11 @@ NULL-01 SYSTEM
 
 
 
+
 <div id="boot" style="display:none;">
 
 
-<p id="bootText"></p>
+<p id="bootText"><span id="cursor">_</span></p>
 
 
 </div>
@@ -120,7 +120,12 @@ function typing(){
 if(i<text.length){
 
 
-element.innerHTML+=text[i];
+element.innerHTML=
+element.innerHTML.replace("_","")
++
+text[i]
++
+"_";
 
 
 i++;
@@ -135,6 +140,10 @@ speed
 }
 
 else{
+
+
+element.innerHTML=
+element.innerHTML.replace("_","");
 
 
 if(callback){
@@ -154,6 +163,7 @@ typing();
 
 
 }
+
 
 
 
@@ -277,6 +287,7 @@ document
 
 
 let text =
+
 
 "正在启动 NULL-01 系统...\n\n"+
 
