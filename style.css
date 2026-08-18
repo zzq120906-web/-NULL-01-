@@ -423,3 +423,134 @@ max-width:850px;
 
 
 }
+/* ARG 数据面板 */
+
+.panel{
+
+    margin-top:25px;
+
+    padding:20px;
+
+    border:
+
+    1px solid rgba(0,255,136,.5);
+
+
+    background:
+
+    rgba(0,255,136,.05);
+
+
+    animation:
+
+    pulse 3s infinite;
+
+}
+
+
+
+@keyframes pulse{
+
+
+0%{
+
+box-shadow:0 0 5px rgba(0,255,136,.2);
+
+}
+
+
+50%{
+
+box-shadow:0 0 20px rgba(0,255,136,.4);
+
+}
+
+
+100%{
+
+box-shadow:0 0 5px rgba(0,255,136,.2);
+
+}
+
+
+}
+
+
+
+
+
+input{
+
+
+width:100%;
+
+
+max-width:400px;
+
+
+margin-top:15px;
+
+
+padding:14px;
+
+
+background:
+
+rgba(0,0,0,.8);
+
+
+border:
+
+1px solid #00ff88;
+
+
+color:#00ff88;
+
+
+font-family:inherit;
+
+
+font-size:16px;
+
+
+outline:none;
+
+
+
+}
+
+
+
+input:focus{
+
+
+box-shadow:
+
+0 0 15px #00ff88;
+
+
+}
+
+
+
+
+hr{
+
+
+border:0;
+
+
+height:1px;
+
+
+background:
+
+rgba(0,255,136,.5);
+
+
+margin:
+
+25px 0;
+
+
+}
