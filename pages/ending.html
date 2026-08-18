@@ -1,20 +1,51 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 
-
 <head>
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>
-NULL-01 | END
+NULL-01 ENDING
 </title>
 
-
 <link rel="stylesheet" href="../style.css">
+
+
+<style>
+
+
+.notice{
+
+color:#ff3333;
+
+}
+
+
+.hidden{
+
+opacity:0;
+
+animation:show 1s forwards;
+
+}
+
+
+@keyframes show{
+
+to{
+
+opacity:1;
+
+}
+
+}
+
+
+
+</style>
 
 
 </head>
@@ -31,70 +62,18 @@ NULL-01 | END
 
 <div class="top">
 
-NULL-01 // RECOVERY COMPLETE
+NULL-01 SYSTEM
 
 </div>
+
 
 
 
 <div class="screen">
 
 
-<p id="loading">
 
-正在恢复最终记录...
-
-</p>
-
-
-
-<div id="finish" style="display:none;">
-
-
-
-<p>
-
-第一阶段恢复完成。
-
-</p>
-
-
-
-<hr>
-
-
-
-<p>
-
-调查结果：
-
-</p>
-
-
-<div class="panel">
-
-
-<p>
-✔ LOG-000 已恢复
-</p>
-
-
-<p>
-✔ NULL-01 已发现
-</p>
-
-
-<p>
-✔ MIRROR 数据已解析
-</p>
-
-
-<p>
-✔ SECRET 区域已访问
-</p>
-
-
-</div>
+<div id="text"></div>
 
 
 
@@ -102,68 +81,11 @@ NULL-01 // RECOVERY COMPLETE
 
 
 
-<p>
+<button onclick="location.href='../index.html'">
 
-但是：
+返回系统
 
-</p>
-
-
-
-<p class="danger">
-
-你访问的这份记录，
-
-原本不存在。
-
-</p>
-
-
-
-<br>
-
-
-
-<p>
-
-记录编号：
-
-NULL-01
-
-</p>
-
-
-
-<p>
-
-状态：
-
-观察中
-
-</p>
-
-
-
-
-<hr>
-
-
-
-<p>
-
-下一阶段：
-
-</p>
-
-
-<p>
-
-MIRROR-02
-
-等待恢复...
-
-</p>
-
+</button>
 
 
 
@@ -174,8 +96,6 @@ MIRROR-02
 </div>
 
 
-
-</div>
 
 
 
@@ -183,20 +103,137 @@ MIRROR-02
 <script>
 
 
+let box=document.getElementById("text");
+
+
+
+let content=[
+
+
+"第一阶段恢复完成。",
+
+
+"",
+
+
+"已确认异常档案：NULL-01",
+
+
+"",
+
+
+"但是检测到新的问题。",
+
+
+"",
+
+
+"该档案创建时间：2026-08-17",
+
+
+"系统首次启动时间：2026-08-18",
+
+
+"",
+
+
+"时间记录存在冲突。",
+
+
+"",
+
+
+"正在寻找创建者...",
+
+
+"",
+
+
+"查询结果：",
+
+
+"",
+
+
+"UNKNOWN"
+
+
+
+];
+
+
+
+let i=0;
+
+
+
+function type(){
+
+
+
+if(i<content.length){
+
+
+
+box.innerHTML+=content[i]+"<br>";
+
+
+i++;
+
+
+setTimeout(type,700);
+
+
+
+}
+
+
+else{
+
+
+
 setTimeout(()=>{
 
 
-document.getElementById("loading").innerHTML=
-
-"恢复完成。";
+box.innerHTML+=
 
 
-document.getElementById("finish").style.display=
+`
 
-"block";
+<br>
+
+<p class="notice">
+
+[新记录]
+
+</p>
 
 
-},2500);
+<br>
+
+发现未读取文件：
+
+<br>
+
+LOG-001
+
+`;
+
+
+
+},1500);
+
+
+
+}
+
+
+
+}
+
+
+
+type();
 
 
 
@@ -205,6 +242,5 @@ document.getElementById("finish").style.display=
 
 
 </body>
-
 
 </html>
