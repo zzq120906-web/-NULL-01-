@@ -11,15 +11,20 @@
 NULL-01 DATABASE
 </title>
 
+
 <link rel="stylesheet" href="../style.css">
 
 
 <style>
 
 
-#result{
+.screen{
 
-margin-top:25px;
+font-size:15px;
+
+line-height:1.5;
+
+padding:15px;
 
 }
 
@@ -37,57 +42,31 @@ color:#ff3333;
 
 color:#ff3333;
 
-font-size:22px;
+font-size:20px;
 
 }
 
 
 
-.hidden{
-
-display:none;
-
-}
+@media(max-width:768px){
 
 
+.screen{
 
-.glitch{
+font-size:12px;
 
-animation:glitch .15s;
+padding:10px;
 
 }
 
 
 
-@keyframes glitch{
+input{
 
-
-0%{
-
-transform:translate(0);
+font-size:14px;
 
 }
 
-
-30%{
-
-transform:translate(-5px);
-
-}
-
-
-60%{
-
-transform:translate(5px);
-
-}
-
-
-100%{
-
-transform:translate(0);
-
-}
 
 
 }
@@ -117,9 +96,11 @@ NULL-01 DATABASE
 
 
 
-
 <div class="screen">
 
+
+
+<div id="page">
 
 
 <p>
@@ -133,9 +114,7 @@ ONLINE
 </p>
 
 
-
 <hr>
-
 
 
 <p>
@@ -146,14 +125,14 @@ ONLINE
 
 
 
-<input id="code" autocomplete="off">
-
+<input id="code">
 
 
 <br>
 
 
-<button onclick="searchFile()">
+
+<button onclick="search()">
 
 查询
 
@@ -164,9 +143,11 @@ ONLINE
 <div id="result"></div>
 
 
-
 </div>
 
+
+
+</div>
 
 
 </div>
@@ -178,23 +159,23 @@ ONLINE
 <script>
 
 
-let result=document.getElementById("result");
+function search(){
 
 
 
-function searchFile(){
+let code=
 
-
-
-let code=document
-
-.getElementById("code")
+document.getElementById("code")
 
 .value
 
 .trim()
 
 .toUpperCase();
+
+
+
+let result=document.getElementById("result");
 
 
 
@@ -216,25 +197,20 @@ setTimeout(()=>{
 
 
 
-// 正常档案
-
-
 if(code==="001"){
 
 
 
 result.innerHTML=
 
-
 `
 
 <hr>
 
+
 <p>
 
 档案编号：
-
-<br>
 
 001
 
@@ -245,8 +221,6 @@ result.innerHTML=
 
 类型：
 
-<br>
-
 系统维护记录
 
 </p>
@@ -256,8 +230,6 @@ result.innerHTML=
 
 状态：
 
-<br>
-
 正常
 
 </p>
@@ -266,8 +238,6 @@ result.innerHTML=
 <p>
 
 备注：
-
-<br>
 
 无异常。
 
@@ -279,63 +249,6 @@ result.innerHTML=
 
 }
 
-
-
-// 空档案
-
-
-else if(code==="000"){
-
-
-
-result.innerHTML=
-
-
-`
-
-<hr>
-
-<p>
-
-档案编号：
-
-<br>
-
-000
-
-</p>
-
-
-<p>
-
-状态：
-
-<br>
-
-空记录
-
-</p>
-
-
-<p>
-
-备注：
-
-<br>
-
-没有对应文件。
-
-</p>
-
-`;
-
-
-
-}
-
-
-
-// 异常档案
 
 
 else if(code==="NULL-01"){
@@ -359,12 +272,8 @@ QUERY ERROR
 setTimeout(()=>{
 
 
-document.body.classList.add("glitch");
-
-
 
 result.innerHTML=
-
 
 `
 
@@ -390,7 +299,6 @@ NULL-01
 </p>
 
 
-
 <p>
 
 状态：
@@ -400,7 +308,6 @@ NULL-01
 不存在
 
 </p>
-
 
 
 <p>
@@ -417,59 +324,11 @@ NULL-01
 
 <p>
 
-记录：
+访问记录：
 
 <br>
 
-未知
-
-</p>
-
-
-
-<hr>
-
-
-
-<p>
-
-【残留记录】
-
-</p>
-
-
-
-<p>
-
-访问时间：
-
-<br>
-
-2026-08-17 23:41
-
-</p>
-
-
-
-<p>
-
-访问者：
-
-<br>
-
-UNKNOWN
-
-</p>
-
-
-
-<p>
-
-检测到关联文件：
-
-<br>
-
-MIRROR
+存在
 
 </p>
 
@@ -481,11 +340,12 @@ MIRROR
 
 </button>
 
+
 `;
 
 
 
-},1200);
+},1000);
 
 
 
@@ -493,18 +353,15 @@ MIRROR
 
 
 
-// 其他
-
-
 else{
 
 
 result.innerHTML=
 
-
 `
 
 <hr>
+
 
 <p>
 
@@ -520,7 +377,7 @@ result.innerHTML=
 
 
 
-},1200);
+},1000);
 
 
 
@@ -529,7 +386,6 @@ result.innerHTML=
 
 
 </script>
-
 
 
 </body>
