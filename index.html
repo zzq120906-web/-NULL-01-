@@ -7,75 +7,123 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>
-NULL-01 SYSTEM
-</title>
+<title>NULL-01 SYSTEM</title>
 
 <link rel="stylesheet" href="style.css">
 
+
 <style>
 
-#bootText{
 
-line-height:2;
+body{
 
-}
-
-
-.cursor::after{
-
-content:"_";
-
-animation:blink .8s infinite;
+animation:fadeIn 2s;
 
 }
 
 
-@keyframes blink{
+@keyframes fadeIn{
 
-50%{
+from{
 
 opacity:0;
 
 }
 
-}
+to{
 
-
-.glitch{
-
-animation:glitch .15s;
+opacity:1;
 
 }
 
+}
 
-@keyframes glitch{
+
+
+.boot-box{
+
+animation:
+
+powerOn 1.8s;
+
+}
+
+
+
+@keyframes powerOn{
 
 
 0%{
 
-transform:translate(0);
+transform:scaleY(0);
 
-}
-
-
-30%{
-
-transform:translate(-5px,2px);
+opacity:0;
 
 }
 
 
 60%{
 
-transform:translate(4px,-2px);
+transform:scaleY(1.1);
+
+opacity:1;
 
 }
 
 
 100%{
 
-transform:translate(0);
+transform:scaleY(1);
+
+}
+
+}
+
+
+
+.system-title{
+
+
+font-size:28px;
+
+letter-spacing:5px;
+
+text-align:center;
+
+text-shadow:
+
+0 0 15px #00ff88;
+
+
+animation:
+
+flicker 3s infinite;
+
+
+}
+
+
+
+@keyframes flicker{
+
+
+0%,90%,100%{
+
+opacity:1;
+
+}
+
+
+92%{
+
+opacity:.4;
+
+}
+
+
+94%{
+
+opacity:1;
 
 }
 
@@ -84,11 +132,98 @@ transform:translate(0);
 
 
 
-.flash{
+.status-light{
 
-color:#ff3333;
+
+display:inline-block;
+
+width:8px;
+
+height:8px;
+
+background:#ff3333;
+
+border-radius:50%;
+
+
+box-shadow:
+
+0 0 15px #ff3333;
+
+
+animation:
+
+blink 1s infinite;
+
 
 }
+
+
+
+@keyframes blink{
+
+
+50%{
+
+opacity:.3;
+
+}
+
+
+}
+
+
+
+.scan{
+
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:3px;
+
+background:#00ff88;
+
+
+box-shadow:
+
+0 0 20px #00ff88;
+
+
+animation:
+
+scan 3s linear infinite;
+
+
+}
+
+
+
+@keyframes scan{
+
+
+from{
+
+top:0;
+
+}
+
+
+to{
+
+top:100%;
+
+}
+
+
+
+}
+
 
 
 </style>
@@ -100,7 +235,12 @@ color:#ff3333;
 <body>
 
 
-<div class="terminal">
+
+<div class="scan"></div>
+
+
+
+<div class="terminal boot-box">
 
 
 <div class="top">
@@ -114,11 +254,19 @@ NULL-01 SYSTEM
 <div class="screen">
 
 
+<div class="system-title">
 
-<div id="main">
+NULL-01
+
+</div>
+
+
+<br>
 
 
 <p>
+
+<span class="status-light"></span>
 
 SYSTEM STATUS：
 
@@ -129,7 +277,6 @@ OFFLINE
 </span>
 
 </p>
-
 
 
 <p>
@@ -153,22 +300,6 @@ OFFLINE
 
 
 
-
-
-<div id="boot" style="display:none;">
-
-
-<p id="bootText" class="cursor"></p>
-
-
-</div>
-
-
-
-</div>
-
-
-
 </div>
 
 
@@ -180,117 +311,86 @@ OFFLINE
 function startGame(){
 
 
-
-document.getElementById("main").style.display="none";
-
-
-document.getElementById("boot").style.display="block";
+document.body.classList.add("glitch");
 
 
 
-let box=document.getElementById("bootText");
+let screen=document.querySelector(".screen");
 
 
 
-let text = 
+screen.innerHTML=`
 
-"NULL-01 SYSTEM\n\n"+
+<p>
 
-"正在唤醒...\n\n"+
+SYSTEM BOOTING...
 
-"检查核心状态...\n\n"+
+</p>
 
-"读取异常记录...\n\n"+
+<br>
 
-"读取失败。\n\n"+
+<p id="load">
 
-"尝试恢复最近一次状态...\n\n"+
+</p>
 
-"恢复对象不存在。\n\n"+
+`;
 
-"继续启动...";
+
+
+let text=
+
+"INITIALIZING...\n\n"+
+"CHECKING FILE SYSTEM...\n\n"+
+"UNKNOWN DATA FOUND...\n\n"+
+"ACCESS GRANTED";
 
 
 
 let i=0;
+
+let box=document.getElementById("load");
 
 
 
 function typing(){
 
 
-
-if(i < text.length){
-
+if(i<text.length){
 
 
-let char=text[i];
-
-
-
-if(char === "\n"){
-
+if(text[i]=="\n"){
 
 box.innerHTML+="<br>";
-
 
 }
 
 else{
 
-
-box.innerHTML+=char;
-
+box.innerHTML+=text[i];
 
 }
-
 
 
 i++;
 
 
-setTimeout(typing,90);
-
+setTimeout(typing,45);
 
 
 }
 
-
-
 else{
 
 
-
 setTimeout(()=>{
 
-
-
-document.body.classList.add("glitch");
-
-
-
-box.innerHTML+=
-
-"<br><br><span class='flash'>ERROR：UNKNOWN ACCESS</span>";
-
-
-
-setTimeout(()=>{
-
-
-window.location.href="pages/log.html";
+location.href="pages/log.html";
 
 
 },1200);
 
 
-
-},1800);
-
-
-
 }
-
 
 
 }
@@ -300,12 +400,10 @@ window.location.href="pages/log.html";
 typing();
 
 
-
 }
 
 
 </script>
-
 
 
 </body>
