@@ -1,193 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 
-
 <head>
 
 <meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<meta name="theme-color" content="#000000">
+
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
 
 <title>
-
 NULL-01 SYSTEM
-
 </title>
 
 
 <link rel="stylesheet" href="style.css">
 
 
-<style>
-
-
-/* 开幕闪屏 */
-
-#flash{
-
-position:fixed;
-
-inset:0;
-
-background:#00ff88;
-
-opacity:0;
-
-pointer-events:none;
-
-z-index:9999;
-
-}
-
-
-
-#flash.active{
-
-animation:flashEffect .25s;
-
-}
-
-
-
-@keyframes flashEffect{
-
-
-0%{
-
-opacity:0;
-
-}
-
-
-30%{
-
-opacity:.35;
-
-}
-
-
-100%{
-
-opacity:0;
-
-}
-
-
-}
-
-
-
-/* 初始出现 */
-
-.terminal{
-
-
-animation:
-
-terminalOn 1.5s;
-
-
-}
-
-
-
-@keyframes terminalOn{
-
-
-0%{
-
-opacity:0;
-
-transform:scale(.95);
-
-filter:brightness(3);
-
-}
-
-
-50%{
-
-opacity:1;
-
-}
-
-
-100%{
-
-transform:scale(1);
-
-filter:brightness(1);
-
-}
-
-
-}
-
-
-
-/* 加载故障 */
-
-.loading-glitch{
-
-
-animation:
-
-loadShake .3s;
-
-
-}
-
-
-
-@keyframes loadShake{
-
-
-0%{
-
-transform:translate(0);
-
-}
-
-
-25%{
-
-transform:translate(-4px);
-
-}
-
-
-50%{
-
-transform:translate(4px);
-
-}
-
-
-75%{
-
-transform:translate(-2px);
-
-}
-
-
-100%{
-
-transform:translate(0);
-
-}
-
-
-}
-
-
-</style>
-
-
 </head>
-
-
-
 
 
 <body>
@@ -196,19 +29,27 @@ transform:translate(0);
 <div id="flash"></div>
 
 
+<div class="data-stream">
+
+01001001<br>
+NULL-01<br>
+RECOVERY<br>
+DATA LOST<br>
+ERROR<br>
+00110101
+
+</div>
+
+
 
 <div class="terminal">
 
 
-
 <div class="top">
-
 
 NULL-01 SYSTEM
 
-
 </div>
-
 
 
 
@@ -216,37 +57,20 @@ NULL-01 SYSTEM
 <div class="screen">
 
 
-
 <div id="main">
 
 
-
-<p>
-
-SYSTEM STATUS：
-
-<span class="danger">
-
-OFFLINE
-
-</span>
-
+<p id="status">
 
 </p>
 
 
-
-
-<p>
-
-未知系统等待访问。
+<p id="intro">
 
 </p>
-
 
 
 <br>
-
 
 
 <button onclick="startGame()">
@@ -256,9 +80,7 @@ OFFLINE
 </button>
 
 
-
 </div>
-
 
 
 
@@ -266,9 +88,10 @@ OFFLINE
 <div id="boot" style="display:none;">
 
 
-<p id="bootText">
+<p id="bootText"></p>
 
-</p>
+
+</div>
 
 
 
@@ -276,15 +99,7 @@ OFFLINE
 
 
 
-
 </div>
-
-
-
-
-</div>
-
-
 
 
 
@@ -293,11 +108,125 @@ OFFLINE
 <script>
 
 
+function typeText(element,text,speed,callback){
+
+
+let i=0;
+
+
+function typing(){
+
+
+if(i<text.length){
+
+
+element.innerHTML+=text[i];
+
+
+i++;
+
+
+setTimeout(
+typing,
+speed
+);
+
+
+}
+
+else{
+
+
+if(callback){
+
+callback();
+
+}
+
+
+}
+
+
+}
+
+
+typing();
+
+
+}
+
+
+
+
+window.onload=function(){
+
+
+setTimeout(()=>{
+
+
+typeText(
+
+document.getElementById("status"),
+
+"SYSTEM STATUS：",
+
+80,
+
+()=>{
+
+
+let span=document.createElement("span");
+
+
+span.className="danger";
+
+
+span.innerHTML=" OFFLINE";
+
+
+document
+.getElementById("status")
+.appendChild(span);
+
+
+}
+
+
+);
+
+
+},800);
+
+
+
+
+
+setTimeout(()=>{
+
+
+typeText(
+
+document.getElementById("intro"),
+
+"未知系统等待访问。",
+
+90
+
+);
+
+
+},2200);
+
+
+
+}
+
+
+
+
+
 function startGame(){
 
-
-
-// 闪屏
 
 
 document
@@ -306,7 +235,24 @@ document
 
 
 
-// 隐藏主页
+document
+.body
+.classList.add("warning-flash");
+
+
+
+setTimeout(()=>{
+
+
+document
+.body
+.classList.remove("warning-flash");
+
+
+},200);
+
+
+
 
 
 document
@@ -315,16 +261,11 @@ document
 
 
 
-// 显示加载
-
-
 document
 .getElementById("boot")
 .style.display="block";
 
 
-
-// 故障效果
 
 
 document
@@ -336,7 +277,6 @@ document
 
 
 let text =
-
 
 "正在启动 NULL-01 系统...\n\n"+
 
@@ -364,12 +304,10 @@ let box=document
 
 
 
-
-function typing(){
-
+function bootTyping(){
 
 
-if(i < text.length){
+if(i<text.length){
 
 
 
@@ -396,7 +334,7 @@ i++;
 
 setTimeout(
 
-typing,
+bootTyping,
 
 70
 
@@ -407,7 +345,6 @@ typing,
 }
 
 else{
-
 
 
 setTimeout(()=>{
@@ -425,12 +362,14 @@ window.location.href=
 }
 
 
+
 }
 
 
 
 
-typing();
+
+bootTyping();
 
 
 
@@ -441,9 +380,6 @@ typing();
 </script>
 
 
-
-
 </body>
-
 
 </html>
