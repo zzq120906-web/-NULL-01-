@@ -6,13 +6,11 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
 <title>
-
 NULL-01 DATABASE
-
 </title>
 
 
@@ -26,9 +24,7 @@ NULL-01 DATABASE
 <body>
 
 
-
 <div class="terminal">
-
 
 
 <div class="top">
@@ -36,7 +32,6 @@ NULL-01 DATABASE
 NULL-01 DATABASE
 
 </div>
-
 
 
 
@@ -49,9 +44,7 @@ NULL-01 DATABASE
 数据库连接：
 
 <span class="danger">
-
 ONLINE
-
 </span>
 
 </p>
@@ -69,6 +62,7 @@ ONLINE
 <input 
 id="search"
 placeholder="ARCHIVE ID"
+autocomplete="off"
 >
 
 
@@ -81,8 +75,21 @@ placeholder="ARCHIVE ID"
 
 
 
+
 <div id="result">
 
+</div>
+
+
+
+
+<button onclick="backLog()">
+
+返回日志
+
+</button>
+
+
 
 </div>
 
@@ -90,8 +97,6 @@ placeholder="ARCHIVE ID"
 
 </div>
 
-
-</div>
 
 
 
@@ -107,7 +112,6 @@ placeholder="ARCHIVE ID"
 function searchFile(){
 
 
-
 let id =
 
 document
@@ -118,11 +122,34 @@ document
 
 
 
-
 let result =
 
 document.getElementById("result");
 
+
+
+
+if(id===""){
+
+
+result.innerHTML=
+
+`
+
+<hr>
+
+<p>
+
+请输入档案编号。
+
+</p>
+
+`;
+
+return;
+
+
+}
 
 
 
@@ -135,7 +162,7 @@ result.innerHTML=
 
 <p>
 
-正在查询数据库...
+正在连接数据库...
 
 </p>
 
@@ -144,9 +171,7 @@ result.innerHTML=
 
 
 
-setTimeout(()=>{
-
-
+setTimeout(function(){
 
 
 
@@ -163,7 +188,7 @@ result.innerHTML=
 
 <p>
 
-档案：
+档案编号：
 
 001
 
@@ -196,12 +221,12 @@ result.innerHTML=
 
 </p>
 
+
 `;
 
 
 
 }
-
 
 
 
@@ -264,7 +289,8 @@ NULL-01
 </p>
 
 
-<button onclick="mirror()">
+
+<button onclick="enterMirror()">
 
 查看关联记录
 
@@ -275,7 +301,11 @@ NULL-01
 
 
 
+if(typeof saveClue === "function"){
+
 saveClue("NULL-01");
+
+}
 
 
 
@@ -307,6 +337,7 @@ result.innerHTML=
 
 </p>
 
+
 `;
 
 
@@ -315,8 +346,7 @@ result.innerHTML=
 
 
 
-
-},1200);
+},1000);
 
 
 
@@ -327,11 +357,15 @@ result.innerHTML=
 
 
 
-function mirror(){
+function enterMirror(){
 
 
-saveClue("MIRROR");
 
+document.querySelector(".terminal").style.opacity="0";
+
+
+
+setTimeout(function(){
 
 
 window.location.href=
@@ -339,13 +373,29 @@ window.location.href=
 "mirror.html";
 
 
+},600);
+
+
+
 }
 
 
 
 
-</script>
 
+function backLog(){
+
+
+window.location.href=
+
+"log.html";
+
+
+}
+
+
+
+</script>
 
 
 
