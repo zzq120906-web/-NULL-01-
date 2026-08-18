@@ -42,7 +42,6 @@ opacity:0;
 }
 
 
-
 .glitch{
 
 animation:glitch .15s;
@@ -94,7 +93,6 @@ color:#ff3333;
 
 </style>
 
-
 </head>
 
 
@@ -112,7 +110,9 @@ NULL-01 SYSTEM
 </div>
 
 
+
 <div class="screen">
+
 
 
 <div id="main">
@@ -129,6 +129,7 @@ OFFLINE
 </span>
 
 </p>
+
 
 
 <p>
@@ -153,8 +154,8 @@ OFFLINE
 
 
 
-<div id="boot" style="display:none;">
 
+<div id="boot" style="display:none;">
 
 
 <p id="bootText" class="cursor"></p>
@@ -167,13 +168,13 @@ OFFLINE
 </div>
 
 
+
 </div>
 
 
 
 
 <script>
-
 
 
 function startGame(){
@@ -191,56 +192,23 @@ let box=document.getElementById("bootText");
 
 
 
-let lines=[
+let text = 
 
+"NULL-01 SYSTEM\n\n"+
 
-"NULL-01 SYSTEM",
+"正在唤醒...\n\n"+
 
+"检查核心状态...\n\n"+
 
-"",
+"读取异常记录...\n\n"+
 
+"读取失败。\n\n"+
 
-"正在唤醒...",
+"尝试恢复最近一次状态...\n\n"+
 
+"恢复对象不存在。\n\n"+
 
-"",
-
-
-"检查核心状态...",
-
-
-"",
-
-
-"读取异常记录...",
-
-
-"",
-
-
-"读取失败。",
-
-
-"",
-
-
-"尝试恢复最近一次状态...",
-
-
-"",
-
-
-"恢复对象不存在。",
-
-
-"",
-
-
-"继续启动..."
-
-
-
-];
+"继续启动...";
 
 
 
@@ -248,24 +216,45 @@ let i=0;
 
 
 
-function write(){
+function typing(){
 
 
 
-if(i<lines.length){
+if(i < text.length){
 
 
-box.innerHTML+=lines[i]+"<br>";
+
+let char=text[i];
+
+
+
+if(char === "\n"){
+
+
+box.innerHTML+="<br>";
+
+
+}
+
+else{
+
+
+box.innerHTML+=char;
+
+
+}
+
 
 
 i++;
 
 
-setTimeout(write,700);
+setTimeout(typing,90);
 
 
 
 }
+
 
 
 else{
@@ -282,12 +271,11 @@ document.body.classList.add("glitch");
 
 box.innerHTML+=
 
-"<br><span class='flash'>ERROR：UNKNOWN ACCESS</span>";
+"<br><br><span class='flash'>ERROR：UNKNOWN ACCESS</span>";
 
 
 
 setTimeout(()=>{
-
 
 
 window.location.href="pages/log.html";
@@ -309,7 +297,7 @@ window.location.href="pages/log.html";
 
 
 
-write();
+typing();
 
 
 
