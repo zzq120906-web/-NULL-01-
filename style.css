@@ -3,6 +3,7 @@
 }
 
 
+
 body{
 
     margin:0;
@@ -10,7 +11,13 @@ body{
     min-height:100vh;
 
     background:
-    radial-gradient(circle at top,#123,#020202 50%);
+
+    radial-gradient(
+    circle at center,
+    #102018,
+    #020403 70%
+    );
+
 
     display:flex;
 
@@ -18,11 +25,17 @@ body{
 
     align-items:center;
 
+
+    color:#00ff88;
+
+
     font-family:
+
     "Courier New",
     monospace;
 
-    color:#00ff88;
+
+    overflow:hidden;
 
     padding:20px;
 
@@ -30,169 +43,286 @@ body{
 
 
 
-body::after{
+/* 扫描线 */
+
+body::before{
+
 
     content:"";
+
+
+    position:fixed;
+
+
+    inset:0;
+
+
+    background:
+
+    repeating-linear-gradient(
+
+    0deg,
+
+    rgba(0,255,136,.04),
+
+    rgba(0,255,136,.04) 1px,
+
+    transparent 2px,
+
+    transparent 5px
+
+    );
+
+
+    pointer-events:none;
+
+
+}
+
+
+
+/* 噪点 */
+
+.noise{
+
 
     position:fixed;
 
     inset:0;
 
-    background:
-    repeating-linear-gradient(
-    0deg,
-    rgba(0,255,136,.04) 0px,
-    rgba(0,255,136,.04) 1px,
-    transparent 2px,
-    transparent 5px
-    );
 
-    pointer-events:none;
+    opacity:.08;
+
+
+    background-image:
+
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+
 
 }
 
 
+
+/* 主窗口 */
 
 .terminal{
 
 
-width:100%;
-
-max-width:760px;
-
-min-height:520px;
-
-background:
-
-rgba(0,0,0,.75);
+    width:100%;
 
 
-border:
-
-1px solid #00ff88;
+    max-width:760px;
 
 
-padding:
-
-clamp(15px,4vw,35px);
+    min-height:520px;
 
 
-box-shadow:
+    background:
 
-0 0 35px rgba(0,255,136,.25);
-
-
-border-radius:8px;
+    rgba(0,10,5,.85);
 
 
-animation:
+    border:
 
-fade .8s;
+    1px solid #00ff88;
+
+
+    border-radius:10px;
+
+
+    padding:
+
+    clamp(20px,5vw,40px);
+
+
+    box-shadow:
+
+
+    0 0 35px rgba(0,255,136,.25);
+
+
+    animation:
+
+    boot 1s ease;
 
 
 }
 
 
 
-@keyframes fade{
+@keyframes boot{
+
 
 from{
 
 opacity:0;
 
-transform:translateY(15px);
+transform:scale(.96);
 
 }
+
 
 to{
 
 opacity:1;
 
-}
+transform:scale(1);
 
 }
-
-
-
-.header{
-
-
-font-size:
-
-clamp(16px,3vw,24px);
-
-
-letter-spacing:
-
-2px;
-
-
-padding-bottom:15px;
-
-
-border-bottom:
-
-1px solid #00ff88;
-
-
-margin-bottom:25px;
 
 
 }
 
 
 
-.content{
+/* 顶部 */
+
+.top{
 
 
-font-size:
+    font-size:
 
-clamp(14px,2vw,17px);
+    clamp(18px,4vw,28px);
 
 
-line-height:
+    letter-spacing:3px;
 
-2;
+
+    padding-bottom:20px;
+
+
+    border-bottom:
+
+    1px solid #00ff88;
 
 
 }
 
+
+
+.status{
+
+
+    margin-top:25px;
+
+
+    font-size:
+
+    clamp(14px,2vw,18px);
+
+
+}
+
+
+
+.danger{
+
+    color:#ff3333;
+
+    animation:blink 1s infinite;
+
+}
+
+
+
+.warning{
+
+    color:#ffaa00;
+
+}
+
+
+
+@keyframes blink{
+
+
+50%{
+
+opacity:.3;
+
+}
+
+
+}
+
+
+
+/* 内容 */
+
+.screen{
+
+
+    margin-top:40px;
+
+
+    line-height:2;
+
+
+}
+
+
+
+.panel{
+
+
+    margin-top:30px;
+
+
+    padding:20px;
+
+
+    border:
+
+    1px solid rgba(0,255,136,.5);
+
+
+    background:
+
+    rgba(0,255,136,.05);
+
+
+}
+
+
+
+/* 按钮 */
 
 
 button{
 
 
-background:
-
-transparent;
+    margin-top:35px;
 
 
-color:#00ff88;
+    width:100%;
 
 
-border:
-
-1px solid #00ff88;
+    padding:15px;
 
 
-padding:
+    background:
 
-12px 25px;
-
-
-margin-top:20px;
+    transparent;
 
 
-font-family:inherit;
+    color:#00ff88;
 
 
-cursor:pointer;
+    border:
+
+    1px solid #00ff88;
 
 
-transition:.3s;
+    font-family:inherit;
 
 
-border-radius:4px;
+    font-size:16px;
+
+
+    cursor:pointer;
+
+
+    transition:.3s;
 
 
 }
@@ -202,12 +332,42 @@ border-radius:4px;
 button:hover{
 
 
-background:#00ff88;
+    background:#00ff88;
 
-color:#000;
+
+    color:#001;
+
+
+    box-shadow:
+
+    0 0 20px #00ff88;
+
 
 }
 
+
+
+
+.footer{
+
+
+    margin-top:45px;
+
+
+    opacity:.5;
+
+
+    font-size:12px;
+
+
+    text-align:center;
+
+
+}
+
+
+
+/* 手机 */
 
 
 @media(max-width:600px){
@@ -223,15 +383,40 @@ padding:10px;
 
 .terminal{
 
+
 min-height:450px;
+
+
+padding:20px;
+
 
 }
 
 
 
-button{
+.top{
 
-width:100%;
+
+letter-spacing:1px;
+
+}
+
+
+}
+
+
+
+/* 平板 */
+
+
+@media(min-width:601px) and (max-width:1100px){
+
+
+.terminal{
+
+
+max-width:850px;
+
 
 }
 
