@@ -5,7 +5,7 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>
 NULL-01 DATABASE
@@ -33,9 +33,21 @@ NULL-01 DATABASE
 <div class="screen">
 
 
+<p id="loading">
+
+正在连接数据库...
+
+</p>
+
+
+
+<div id="main" style="display:none;">
+
+
+
 <p>
 
-数据库连接状态：
+数据库连接：
 
 <span class="danger">
 ONLINE
@@ -78,11 +90,12 @@ placeholder="ARCHIVE ID"
 <br>
 
 
+
 <a href="log.html">
 
 <button>
 
-返回上一页
+返回日志
 
 </button>
 
@@ -98,15 +111,45 @@ placeholder="ARCHIVE ID"
 
 
 
+</div>
+
+
 
 
 <script>
 
 
+setTimeout(function(){
+
+
+document.getElementById("loading").innerHTML=
+
+"数据库验证完成。";
+
+
+setTimeout(function(){
+
+
+document.getElementById("loading").style.display="none";
+
+
+document.getElementById("main").style.display="block";
+
+
+},1000);
+
+
+
+},2000);
+
+
+
+
+
 function searchFile(){
 
 
-let input = document
+let id=document
 .getElementById("search")
 .value
 .toUpperCase()
@@ -114,25 +157,26 @@ let input = document
 
 
 
-let result = document
+let result=document
 .getElementById("result");
 
 
 
 
-if(input === "NULL"){
+
+if(id==="NULL"){
 
 
+result.innerHTML=
 
-result.innerHTML = `
-
+`
 
 <hr>
 
 
 <p class="danger">
 
-异常档案已发现
+发现异常档案
 
 </p>
 
@@ -201,13 +245,13 @@ NULL-01
 
 
 
-
-else if(input === "001"){
-
+else if(id==="001"){
 
 
-result.innerHTML = `
 
+result.innerHTML=
+
+`
 
 <hr>
 
@@ -237,309 +281,13 @@ result.innerHTML = `
 正常
 
 </p>
-
-
-<p>
-
-无异常信息。
-
-</p>
-
-
-`;
-
-
-
-}
-
-
-
-else{
-
-
-
-result.innerHTML = `
-
-
-<hr>
-
-
-<p>
-
-未找到档案。
-
-</p>
-
-
-<p>
-
-查询行为已记录。
-
-</p>
-
-
-`;
-
-
-
-}
-
-
-
-}
-
-
-</script>
-
-
-
-</body>
-
-
-</html><!DOCTYPE html>
-<html lang="zh-CN">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>
-NULL-01 DATABASE
-</title>
-
-<link rel="stylesheet" href="../style.css">
-
-</head>
-
-
-<body>
-
-
-<div class="terminal">
-
-
-<div class="top">
-
-NULL-01 DATABASE
-
-</div>
-
-
-
-<div class="screen">
-
-
-<p>
-
-数据库连接状态：
-
-<span class="danger">
-ONLINE
-</span>
-
-</p>
-
-
-
-<p>
-
-请输入档案编号：
-
-</p>
-
-
-
-<input 
-id="search"
-placeholder="ARCHIVE ID"
->
-
-
-
-<button onclick="searchFile()">
-
-查询
-
-</button>
-
-
-
-
-<div id="result">
-
-</div>
-
-
-
-<br>
-
-
-<a href="log.html">
-
-<button>
-
-返回上一页
-
-</button>
-
-</a>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-<script>
-
-
-function searchFile(){
-
-
-let input = document
-.getElementById("search")
-.value
-.toUpperCase()
-.trim();
-
-
-
-let result = document
-.getElementById("result");
-
-
-
-
-if(input === "NULL"){
-
-
-
-result.innerHTML = `
-
-
-<hr>
-
-
-<p class="danger">
-
-异常档案已发现
-
-</p>
-
-
-
-<p>
-
-编号：
-
-NULL-01
-
-</p>
-
-
-
-<p>
-
-状态：
-
-不存在
-
-</p>
-
-
-
-<p>
-
-创建时间：
-
-未知
-
-</p>
-
 
 
 <p>
 
 备注：
 
-该文件没有创建记录。
-
-</p>
-
-
-
-<br>
-
-
-
-<a href="mirror.html">
-
-<button>
-
-查看关联记录
-
-</button>
-
-</a>
-
-
-`;
-
-
-
-}
-
-
-
-
-else if(input === "001"){
-
-
-
-result.innerHTML = `
-
-
-<hr>
-
-
-<p>
-
-档案编号：
-
-001
-
-</p>
-
-
-<p>
-
-名称：
-
-系统维护记录
-
-</p>
-
-
-<p>
-
-状态：
-
-正常
-
-</p>
-
-
-<p>
-
-无异常信息。
+无异常。
 
 </p>
 
@@ -555,9 +303,9 @@ result.innerHTML = `
 else{
 
 
+result.innerHTML=
 
-result.innerHTML = `
-
+`
 
 <hr>
 
@@ -585,6 +333,7 @@ result.innerHTML = `
 
 
 }
+
 
 
 </script>
