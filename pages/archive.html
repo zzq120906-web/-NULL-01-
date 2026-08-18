@@ -5,7 +5,7 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>
 NULL-01 DATABASE
@@ -13,10 +13,90 @@ NULL-01 DATABASE
 
 <link rel="stylesheet" href="../style.css">
 
+
+<style>
+
+
+#result{
+
+margin-top:25px;
+
+}
+
+
+
+.normal{
+
+color:#00ff88;
+
+}
+
+
+
+.error{
+
+color:#ff3333;
+
+}
+
+
+
+.found{
+
+font-size:20px;
+
+color:#ff3333;
+
+animation:flash .8s;
+
+}
+
+
+
+@keyframes flash{
+
+
+0%{
+
+opacity:0;
+
+}
+
+
+50%{
+
+opacity:1;
+
+}
+
+
+100%{
+
+opacity:1;
+
+}
+
+
+}
+
+
+
+.scan{
+
+animation:blink 1s infinite;
+
+}
+
+
+</style>
+
+
 </head>
 
 
+
 <body>
+
 
 
 <div class="terminal">
@@ -33,27 +113,20 @@ NULL-01 DATABASE
 <div class="screen">
 
 
-<p id="loading">
-
-正在连接数据库...
-
-</p>
-
-
-
-<div id="main" style="display:none;">
-
-
 
 <p>
 
-数据库连接：
+DATABASE STATUS:
 
-<span class="danger">
+<br>
+
 ONLINE
-</span>
 
 </p>
+
+
+
+<hr>
 
 
 
@@ -65,10 +138,11 @@ ONLINE
 
 
 
-<input 
-id="search"
-placeholder="ARCHIVE ID"
->
+<input id="code" placeholder="请输入编号">
+
+
+
+<br>
 
 
 
@@ -81,9 +155,7 @@ placeholder="ARCHIVE ID"
 
 
 
-<div id="result">
-
-</div>
+<div id="result"></div>
 
 
 
@@ -91,20 +163,12 @@ placeholder="ARCHIVE ID"
 
 
 
-<a href="log.html">
-
-<button>
+<button onclick="location.href='log.html'">
 
 返回日志
 
 </button>
 
-</a>
-
-
-
-</div>
-
 
 
 </div>
@@ -112,6 +176,8 @@ placeholder="ARCHIVE ID"
 
 
 </div>
+
+
 
 
 
@@ -119,133 +185,34 @@ placeholder="ARCHIVE ID"
 <script>
 
 
-setTimeout(function(){
-
-
-document.getElementById("loading").innerHTML=
-
-"数据库验证完成。";
-
-
-setTimeout(function(){
-
-
-document.getElementById("loading").style.display="none";
-
-
-document.getElementById("main").style.display="block";
-
-
-},1000);
-
-
-
-},2000);
-
-
-
-
-
 function searchFile(){
 
 
-let id=document
-.getElementById("search")
-.value
-.toUpperCase()
-.trim();
+
+let code=
+
+document.getElementById("code").value.trim();
 
 
 
-let result=document
-.getElementById("result");
+let result=
 
+document.getElementById("result");
 
-
-
-
-if(id==="NULL"){
 
 
 result.innerHTML=
 
-`
-
-<hr>
-
-
-<p class="danger">
-
-发现异常档案
-
-</p>
+"<p class='scan'>正在检索...</p>";
 
 
 
-<p>
 
-编号：
-
-NULL-01
-
-</p>
+setTimeout(()=>{
 
 
 
-<p>
-
-状态：
-
-不存在
-
-</p>
-
-
-
-<p>
-
-创建时间：
-
-未知
-
-</p>
-
-
-
-<p>
-
-备注：
-
-该文件没有创建记录。
-
-</p>
-
-
-
-<br>
-
-
-
-<a href="mirror.html">
-
-<button>
-
-查看关联记录
-
-</button>
-
-</a>
-
-
-`;
-
-
-
-}
-
-
-
-else if(id==="001"){
+if(code==="001"){
 
 
 
@@ -255,10 +222,11 @@ result.innerHTML=
 
 <hr>
 
-
-<p>
+<p class="normal">
 
 档案编号：
+
+<br>
 
 001
 
@@ -267,7 +235,9 @@ result.innerHTML=
 
 <p>
 
-名称：
+类型：
+
+<br>
 
 系统维护记录
 
@@ -278,6 +248,8 @@ result.innerHTML=
 
 状态：
 
+<br>
+
 正常
 
 </p>
@@ -287,12 +259,151 @@ result.innerHTML=
 
 备注：
 
+<br>
+
 无异常。
+
+</p>
+
+`;
+
+
+
+}
+
+
+
+else if(code==="000"){
+
+
+
+result.innerHTML=
+
+`
+
+<hr>
+
+<p>
+
+档案编号：
+
+<br>
+
+000
+
+</p>
+
+
+<p>
+
+状态：
+
+<br>
+
+空记录
+
+</p>
+
+
+<p>
+
+备注：
+
+<br>
+
+该编号没有对应文件。
+
+</p>
+
+`;
+
+
+
+}
+
+
+
+else if(code.toUpperCase()==="NULL"){
+
+
+
+result.innerHTML=
+
+"<p>查询失败。</p>";
+
+
+
+
+setTimeout(()=>{
+
+
+document.body.classList.add("glitch");
+
+
+
+result.innerHTML=
+
+
+`
+
+<hr>
+
+<p class="found">
+
+FOUND
+
+</p>
+
+
+<p>
+
+档案编号：
+
+<br>
+
+NULL-01
+
+</p>
+
+
+<p>
+
+状态：
+
+<br>
+
+不存在
+
+</p>
+
+
+<p>
+
+创建时间：
+
+<br>
+
+2026-08-17
+
+</p>
+
+
+<p>
+
+记录：
+
+<br>
+
+未知
 
 </p>
 
 
 `;
+
+
+
+},1200);
 
 
 
@@ -303,32 +414,28 @@ result.innerHTML=
 else{
 
 
+
 result.innerHTML=
 
 `
 
 <hr>
 
-
 <p>
 
-未找到档案。
+未找到对应档案。
 
 </p>
-
-
-<p>
-
-查询行为已记录。
-
-</p>
-
 
 `;
 
 
 
 }
+
+
+
+},1500);
 
 
 
@@ -341,6 +448,5 @@ result.innerHTML=
 
 
 </body>
-
 
 </html>
