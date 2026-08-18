@@ -16,6 +16,14 @@ LOG-000
 
 <style>
 
+#page{
+
+line-height:1.8;
+
+}
+
+
+
 .data{
 
 letter-spacing:4px;
@@ -25,12 +33,6 @@ line-height:2;
 }
 
 
-.hidden{
-
-display:none;
-
-}
-
 
 .warning{
 
@@ -39,11 +41,40 @@ color:#ff3333;
 }
 
 
-.small{
 
-opacity:.8;
+.glitch{
 
-font-size:14px;
+animation:glitch .15s;
+
+}
+
+
+
+@keyframes glitch{
+
+0%{
+
+transform:translate(0);
+
+}
+
+30%{
+
+transform:translate(-4px);
+
+}
+
+60%{
+
+transform:translate(4px);
+
+}
+
+100%{
+
+transform:translate(0);
+
+}
 
 }
 
@@ -52,6 +83,7 @@ font-size:14px;
 
 
 </head>
+
 
 
 <body>
@@ -71,19 +103,98 @@ NULL-01 SYSTEM
 <div class="screen">
 
 
-<div id="loading">
+<div id="page"></div>
 
-
-<p id="loadText"></p>
 
 
 </div>
 
 
 
-<div id="content" style="display:none;">
+</div>
 
 
+
+
+
+
+<script>
+
+
+let page=document.getElementById("page");
+
+
+
+let bootText=
+
+"正在读取日志文件...\n\n"+
+
+"文件完整度：47%\n\n"+
+
+"警告：部分内容无法恢复。";
+
+
+
+let i=0;
+
+
+
+function boot(){
+
+
+
+if(i<bootText.length){
+
+
+
+let c=bootText[i];
+
+
+
+if(c=="\n"){
+
+page.innerHTML+="<br>";
+
+}
+
+else{
+
+page.innerHTML+=c;
+
+}
+
+
+
+i++;
+
+
+setTimeout(boot,70);
+
+
+
+}
+
+else{
+
+
+
+setTimeout(showLog,1000);
+
+
+
+}
+
+
+
+}
+
+
+
+function showLog(){
+
+
+
+page.innerHTML=`
 
 <p>
 
@@ -98,7 +209,6 @@ LOG-000
 RECOVERY FILE
 
 </p>
-
 
 
 <hr>
@@ -161,6 +271,8 @@ RECOVERY FILE
 
 当前状态：
 
+<br>
+
 部分文件仍然存在。
 
 </p>
@@ -215,17 +327,27 @@ RECOVERY FILE
 
 
 
-<p class="small">
+<br>
 
-数据完整度：47%
+
+
+<p>
+
+数据完整度：
+
+47%
 
 <br>
 
-来源：未知
+来源：
+
+未知
 
 <br>
 
-类型：无法识别
+类型：
+
+无法识别
 
 </p>
 
@@ -239,8 +361,28 @@ RECOVERY FILE
 
 
 
-<div id="analysis" class="hidden">
+<div id="analysis"></div>
 
+
+`;
+
+
+
+}
+
+
+
+function analyze(){
+
+
+
+let box=document.getElementById("analysis");
+
+
+
+box.innerHTML=
+
+`
 
 <hr>
 
@@ -259,6 +401,7 @@ RECOVERY FILE
 </p>
 
 
+
 <p>
 
 恢复片段：
@@ -268,6 +411,7 @@ RECOVERY FILE
 N U L L
 
 </p>
+
 
 
 <p>
@@ -296,119 +440,34 @@ N U L L
 
 </button>
 
-
-
-</div>
-
-
-
-</div>
+`;
 
 
 
-</div>
+document.body.classList.add("glitch");
 
-
-
-</div>
-
-
-
-
-
-<script>
-
-
-let loadText=document.getElementById("loadText");
-
-
-let content=document.getElementById("content");
-
-
-
-let text=
-
-"正在读取日志文件...\n\n"+
-
-"文件完整度：47%\n\n"+
-
-"警告：部分内容无法恢复。";
-
-
-
-let i=0;
-
-
-
-function typing(){
-
-
-if(i<text.length){
-
-
-
-if(text[i]=="\n"){
-
-loadText.innerHTML+="<br>";
-
-}
-
-else{
-
-loadText.innerHTML+=text[i];
-
-}
-
-
-
-i++;
-
-
-setTimeout(typing,70);
-
-
-
-}
-
-else{
 
 
 setTimeout(()=>{
 
 
-document.getElementById("loading").style.display="none";
-
-content.style.display="block";
+document.body.classList.remove("glitch");
 
 
-},1000);
+},200);
 
 
 
 }
 
 
-}
 
-
-
-typing();
-
-
-
-
-
-function analyze(){
-
-
-document.getElementById("analysis").style.display="block";
-
-
-}
+boot();
 
 
 
 </script>
+
 
 
 </body>
