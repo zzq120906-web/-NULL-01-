@@ -13,14 +13,16 @@ LOG-000
 
 <link rel="stylesheet" href="../style.css">
 
+
 <style>
 
-.warning{
+.data{
 
-color:#ff3333;
+letter-spacing:4px;
+
+line-height:2;
 
 }
-
 
 
 .hidden{
@@ -30,65 +32,26 @@ display:none;
 }
 
 
+.warning{
 
-.data{
-
-letter-spacing:3px;
-
-line-height:2;
+color:#ff3333;
 
 }
 
 
+.small{
 
-.glitch{
+opacity:.8;
 
-animation:glitch .15s;
-
-}
-
-
-
-@keyframes glitch{
-
-
-0%{
-
-transform:translate(0);
+font-size:14px;
 
 }
-
-
-25%{
-
-transform:translate(-4px);
-
-}
-
-
-50%{
-
-transform:translate(4px);
-
-}
-
-
-100%{
-
-transform:translate(0);
-
-}
-
-
-}
-
 
 
 </style>
 
 
 </head>
-
 
 
 <body>
@@ -108,7 +71,6 @@ NULL-01 SYSTEM
 <div class="screen">
 
 
-
 <div id="loading">
 
 
@@ -116,7 +78,6 @@ NULL-01 SYSTEM
 
 
 </div>
-
 
 
 
@@ -128,10 +89,7 @@ NULL-01 SYSTEM
 
 LOG-000
 
-</p>
-
-
-<p>
+<br>
 
 //
 
@@ -149,40 +107,17 @@ RECOVERY FILE
 
 <p>
 
-
-编号：
-
-<br>
-
-LOG-000
-
-
-</p>
-
-
-
-<p>
-
-创建时间：
+编号：LOG-000
 
 <br>
 
-2026-08-18
-
-</p>
-
-
-
-<p>
-
-记录者：
+创建时间：2026-08-18
 
 <br>
 
-UNKNOWN
+记录者：UNKNOWN
 
 </p>
-
 
 
 
@@ -200,9 +135,7 @@ UNKNOWN
 
 <p>
 
-
 第一次异常发生于系统重启之前。
-
 
 </p>
 
@@ -212,26 +145,15 @@ UNKNOWN
 
 删除请求：
 
-<br>
-
 已执行。
 
-
-</p>
-
-
-
-<p>
+<br>
 
 恢复请求：
 
-<br>
-
 已执行。
 
-
 </p>
-
 
 
 
@@ -239,38 +161,23 @@ UNKNOWN
 
 当前状态：
 
-<br>
-
 部分文件仍然存在。
-
 
 </p>
 
 
 
 <p>
-
 
 原始记录数量：
 
-<br>
-
 0
 
-
-</p>
-
-
-
-<p>
-
+<br>
 
 当前检测数量：
 
-<br>
-
 1
-
 
 </p>
 
@@ -288,9 +195,7 @@ UNKNOWN
 
 
 
-
 <div class="data">
-
 
 01001110
 
@@ -306,68 +211,35 @@ UNKNOWN
 
 01001100
 
-
 </div>
 
 
 
-<br>
+<p class="small">
 
-
-
-<p>
-
-数据完整度：
+数据完整度：47%
 
 <br>
 
-47%
+来源：未知
 
+<br>
+
+类型：无法识别
 
 </p>
 
 
 
-<p>
+<button onclick="analyze()">
 
-来源：
-
-<br>
-
-未知
-
-
-</p>
-
-
-
-<p>
-
-文件类型：
-
-<br>
-
-无法识别
-
-
-</p>
-
-
-
-
-<br>
-
-
-
-<button onclick="checkData()">
-
-查看损坏数据
+分析损坏数据
 
 </button>
 
 
 
-<div id="result" class="hidden">
+<div id="analysis" class="hidden">
 
 
 <hr>
@@ -375,62 +247,58 @@ UNKNOWN
 
 <p>
 
-正在分析...
+正在分析残留字符...
 
 </p>
 
 
-
 <p class="warning">
-
 
 分析失败。
 
 </p>
 
 
-
 <p>
 
-
-原因：
+恢复片段：
 
 <br>
 
-文件不存在。
-
+N U L L
 
 </p>
 
 
-
 <p>
 
-
-残留字符：
+附加索引：
 
 <br>
 
 01
 
+</p>
+
+
+
+<p>
+
+发现未知数据库入口。
 
 </p>
 
 
 
-</div>
-
-
-
-<br>
-
-
-
 <button onclick="location.href='archive.html'">
 
-进入数据库
+访问数据库
 
 </button>
+
+
+
+</div>
 
 
 
@@ -451,16 +319,14 @@ UNKNOWN
 <script>
 
 
-let load=document.getElementById("loadText");
-
+let loadText=document.getElementById("loadText");
 
 
 let content=document.getElementById("content");
 
 
 
-let loadingText=
-
+let text=
 
 "正在读取日志文件...\n\n"+
 
@@ -477,21 +343,19 @@ let i=0;
 function typing(){
 
 
-if(i<loadingText.length){
+if(i<text.length){
 
 
 
-if(loadingText[i]=="\n"){
+if(text[i]=="\n"){
 
-
-load.innerHTML+="<br>";
+loadText.innerHTML+="<br>";
 
 }
 
 else{
 
-
-load.innerHTML+=loadingText[i];
+loadText.innerHTML+=text[i];
 
 }
 
@@ -514,16 +378,14 @@ setTimeout(()=>{
 
 document.getElementById("loading").style.display="none";
 
-
 content.style.display="block";
 
 
-},1200);
+},1000);
 
 
 
 }
-
 
 
 }
@@ -536,26 +398,10 @@ typing();
 
 
 
-function checkData(){
+function analyze(){
 
 
-
-let box=document.getElementById("result");
-
-
-
-box.style.display="block";
-
-
-
-setTimeout(()=>{
-
-
-document.body.classList.add("glitch");
-
-
-},1500);
-
+document.getElementById("analysis").style.display="block";
 
 
 }
@@ -564,6 +410,420 @@ document.body.classList.add("glitch");
 
 </script>
 
+
+</body>
+
+</html><!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+LOG-000
+</title>
+
+<link rel="stylesheet" href="../style.css">
+
+
+<style>
+
+.data{
+
+letter-spacing:4px;
+
+line-height:2;
+
+}
+
+
+.hidden{
+
+display:none;
+
+}
+
+
+.warning{
+
+color:#ff3333;
+
+}
+
+
+.small{
+
+opacity:.8;
+
+font-size:14px;
+
+}
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<div class="terminal">
+
+
+<div class="top">
+
+NULL-01 SYSTEM
+
+</div>
+
+
+
+<div class="screen">
+
+
+<div id="loading">
+
+
+<p id="loadText"></p>
+
+
+</div>
+
+
+
+<div id="content" style="display:none;">
+
+
+
+<p>
+
+LOG-000
+
+<br>
+
+//
+
+<br>
+
+RECOVERY FILE
+
+</p>
+
+
+
+<hr>
+
+
+
+<p>
+
+编号：LOG-000
+
+<br>
+
+创建时间：2026-08-18
+
+<br>
+
+记录者：UNKNOWN
+
+</p>
+
+
+
+<hr>
+
+
+
+<p>
+
+【系统恢复记录】
+
+</p>
+
+
+
+<p>
+
+第一次异常发生于系统重启之前。
+
+</p>
+
+
+
+<p>
+
+删除请求：
+
+已执行。
+
+<br>
+
+恢复请求：
+
+已执行。
+
+</p>
+
+
+
+<p>
+
+当前状态：
+
+部分文件仍然存在。
+
+</p>
+
+
+
+<p>
+
+原始记录数量：
+
+0
+
+<br>
+
+当前检测数量：
+
+1
+
+</p>
+
+
+
+<hr>
+
+
+
+<p>
+
+【损坏数据】
+
+</p>
+
+
+
+<div class="data">
+
+01001110
+
+<br>
+
+01010101
+
+<br>
+
+01001100
+
+<br>
+
+01001100
+
+</div>
+
+
+
+<p class="small">
+
+数据完整度：47%
+
+<br>
+
+来源：未知
+
+<br>
+
+类型：无法识别
+
+</p>
+
+
+
+<button onclick="analyze()">
+
+分析损坏数据
+
+</button>
+
+
+
+<div id="analysis" class="hidden">
+
+
+<hr>
+
+
+<p>
+
+正在分析残留字符...
+
+</p>
+
+
+<p class="warning">
+
+分析失败。
+
+</p>
+
+
+<p>
+
+恢复片段：
+
+<br>
+
+N U L L
+
+</p>
+
+
+<p>
+
+附加索引：
+
+<br>
+
+01
+
+</p>
+
+
+
+<p>
+
+发现未知数据库入口。
+
+</p>
+
+
+
+<button onclick="location.href='archive.html'">
+
+访问数据库
+
+</button>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+let loadText=document.getElementById("loadText");
+
+
+let content=document.getElementById("content");
+
+
+
+let text=
+
+"正在读取日志文件...\n\n"+
+
+"文件完整度：47%\n\n"+
+
+"警告：部分内容无法恢复。";
+
+
+
+let i=0;
+
+
+
+function typing(){
+
+
+if(i<text.length){
+
+
+
+if(text[i]=="\n"){
+
+loadText.innerHTML+="<br>";
+
+}
+
+else{
+
+loadText.innerHTML+=text[i];
+
+}
+
+
+
+i++;
+
+
+setTimeout(typing,70);
+
+
+
+}
+
+else{
+
+
+setTimeout(()=>{
+
+
+document.getElementById("loading").style.display="none";
+
+content.style.display="block";
+
+
+},1000);
+
+
+
+}
+
+
+}
+
+
+
+typing();
+
+
+
+
+
+function analyze(){
+
+
+document.getElementById("analysis").style.display="block";
+
+
+}
+
+
+
+</script>
 
 
 </body>
