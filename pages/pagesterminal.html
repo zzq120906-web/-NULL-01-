@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+
+<title>
+NULL-01 Terminal
+</title>
+
+
+<link rel="stylesheet" href="../style.css">
+
+
+</head>
+
+
+
+<body>
+
+
+<div class="terminal">
+
+
+<div class="header">
+
+NULL-01 TERMINAL
+
+</div>
+
+
+
+<div id="screen">
+
+
+<p>
+终端已连接。
+</p>
+
+
+<p>
+请输入档案密码：
+</p>
+
+
+<input id="code"
+placeholder="CODE">
+
+
+<button onclick="check()">
+确认
+</button>
+
+
+<div id="result"></div>
+
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+function check(){
+
+
+let c=
+document.getElementById("code").value;
+
+
+
+if(c==="4927"){
+
+
+document.getElementById("result").innerHTML=`
+
+<p>
+
+密码正确。
+
+</p>
+
+
+<p>
+
+发现隐藏档案：
+
+CHAPTER_02
+
+</p>
+
+
+<p>
+
+坐标：
+UNKNOWN
+
+</p>
+
+
+`;
+
+}
+
+
+else{
+
+
+document.getElementById("result").innerHTML=
+
+"<p>密码错误。</p>";
+
+}
+
+
+}
+
+
+</script>
+
+
+
+</body>
+
+
+</html>
