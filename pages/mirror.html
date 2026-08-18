@@ -11,10 +11,23 @@
 MIRROR RECOVERY
 </title>
 
+
 <link rel="stylesheet" href="../style.css">
 
 
 <style>
+
+
+.screen{
+
+font-size:15px;
+
+line-height:1.5;
+
+padding:15px;
+
+}
+
 
 
 .warning{
@@ -25,22 +38,61 @@ color:#ff3333;
 
 
 
-.hidden{
-
-display:none;
-
-}
-
-
-
 .flash{
-
-font-size:24px;
 
 color:#ff3333;
 
+font-size:24px;
+
+animation:flash .5s;
+
 }
 
+
+
+@keyframes flash{
+
+
+0%{
+
+opacity:0;
+
+}
+
+
+50%{
+
+opacity:1;
+
+}
+
+
+100%{
+
+opacity:1;
+
+}
+
+
+
+}
+
+
+
+@media(max-width:768px){
+
+
+.screen{
+
+font-size:12px;
+
+padding:10px;
+
+}
+
+
+
+}
 
 
 </style>
@@ -51,6 +103,7 @@ color:#ff3333;
 
 
 <body>
+
 
 
 <div class="terminal">
@@ -64,14 +117,22 @@ MIRROR RECOVERY
 
 
 
+
 <div class="screen">
 
 
+<div id="page">
 
-<div id="loading">
+
+正在连接镜像服务...
 
 
-<p id="text"></p>
+</div>
+
+
+
+</div>
+
 
 
 </div>
@@ -79,9 +140,107 @@ MIRROR RECOVERY
 
 
 
-<div id="content" style="display:none;">
 
 
+<script>
+
+
+let page=document.getElementById("page");
+
+
+
+let step=0;
+
+
+
+let loading=[
+
+
+"正在连接镜像服务...",
+
+
+"读取残留数据...",
+
+
+"恢复文件中...",
+
+
+"验证访问记录..."
+
+
+
+];
+
+
+
+function load(){
+
+
+
+if(step<loading.length){
+
+
+
+page.innerHTML+=
+
+"<br><br>"+loading[step];
+
+
+step++;
+
+
+setTimeout(load,700);
+
+
+
+}
+
+else{
+
+
+
+setTimeout(error,1200);
+
+
+
+}
+
+
+
+}
+
+
+
+function error(){
+
+
+
+document.body.classList.add("glitch");
+
+
+
+page.innerHTML=
+
+
+`
+
+<p class="flash">
+
+USER FOUND
+
+</p>
+
+`;
+
+
+
+setTimeout(()=>{
+
+
+
+page.innerHTML=
+
+`
 
 <p>
 
@@ -98,81 +257,56 @@ MIRROR RECOVERY
 
 文件：
 
-<br>
-
 NULL-01
 
 </p>
-
 
 
 <p>
 
 状态：
 
-<br>
-
 部分恢复
 
 </p>
-
-
-
-<hr>
-
-
-
-<p>
-
-残留数据：
-
-</p>
-
 
 
 <p>
 
 访问时间：
 
-<br>
-
 2026-08-17 23:41
 
 </p>
-
 
 
 <p>
 
 访问者：
 
-<br>
-
 UNKNOWN
 
 </p>
-
 
 
 <hr>
 
 
 
-<p>
+<p class="warning">
 
-恢复结果：
+恢复失败。
 
 </p>
 
 
-
-<p class="warning">
+<p>
 
 缺少：
 
 <br>
 
-原始观察者记录。
+原始观察者记录
 
 </p>
 
@@ -180,17 +314,13 @@ UNKNOWN
 
 <p>
 
-检测到关联日志：
+发现关联日志：
 
 <br>
 
 LOG-001
 
 </p>
-
-
-
-<br>
 
 
 
@@ -201,133 +331,10 @@ LOG-001
 </button>
 
 
-
-</div>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-<script>
-
-
-let box=document.getElementById("text");
-
-
-
-let content=document.getElementById("content");
-
-
-
-let lines=[
-
-
-"正在连接镜像服务...",
-
-
-"",
-
-
-"读取残留文件...",
-
-
-"",
-
-
-"恢复数据中...",
-
-
-"",
-
-
-"发现未知访问记录...",
-
-
-"",
-
-
-"验证访问者..."
-
-
-
-];
-
-
-
-let i=0;
-
-
-
-function type(){
-
-
-
-if(i<lines.length){
-
-
-
-box.innerHTML+=lines[i]+"<br>";
-
-
-i++;
-
-
-setTimeout(type,700);
-
-
-
-}
-
-
-
-else{
-
-
-
-setTimeout(()=>{
-
-
-
-document.body.classList.add("glitch");
-
-
-
-box.innerHTML=
-
-
-`
-
-<span class="flash">
-
-USER FOUND
-
-</span>
-
 `;
 
 
 
-setTimeout(()=>{
-
-
-box.innerHTML="";
-
-
-content.style.display="block";
-
-
-},1000);
-
-
-
 },1000);
 
 
@@ -336,18 +343,14 @@ content.style.display="block";
 
 
 
-}
-
-
-
-type();
+load();
 
 
 
 </script>
 
 
-
 </body>
+
 
 </html>
